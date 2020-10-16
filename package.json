@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -9,6 +9,10 @@
   ],
   "engines": {
     "node": ">=10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/labd/react-loqate"
   },
   "scripts": {
     "start": "tsdx watch",

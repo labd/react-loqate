@@ -1,16 +1,86 @@
 import React, { ChangeEvent, ComponentType, useRef, useState } from 'react';
 import { ClickAwayListener, makeStyles, Portal } from '@material-ui/core';
 import clsx from 'clsx';
+import DefaultInput from './components/DefaultInput';
+import DefaultList from './components/DefaultList';
+import DefaultListItem from './components/DefaultListItem';
 
 interface Props {
   locale: string;
   apiKey: string;
   countries?: string[];
   limit?: number;
-  onSelect: (address: any) => void;
-  inputComponent?: ComponentType;
+  onSelect: (address: Address) => void;
+  components?: Components;
+  inputClassname?: string;
   listClassname?: string;
   listItemClassname?: string;
+}
+
+interface Components {
+  Input?: ComponentType;
+  List?: ComponentType;
+  ListItem?: ComponentType;
+}
+
+export interface Address {
+  AdminAreaCode: string;
+  AdminAreaName: string;
+  Barcode: string;
+  Block: string;
+  BuildingName: string;
+  BuildingNumber: string;
+  City: string;
+  Company: string;
+  CountryIso2: string;
+  CountryIso3: string;
+  CountryIsoNumber: number;
+  CountryName: string;
+  DataLevel: string;
+  Department: string;
+  District: string;
+  DomesticId: string;
+  Field1: string;
+  Field2: string;
+  Field3: string;
+  Field4: string;
+  Field5: string;
+  Field6: string;
+  Field7: string;
+  Field8: string;
+  Field9: string;
+  Field10: string;
+  Field11: string;
+  Field12: string;
+  Field13: string;
+  Field14: string;
+  Field15: string;
+  Field16: string;
+  Field17: string;
+  Field18: string;
+  Field19: string;
+  Field20: string;
+  Id: string;
+  Label: string;
+  Language: string;
+  LanguageAlternatives: string;
+  Line1: string;
+  Line2: string;
+  Line3: string;
+  Line4: string;
+  Line5: string;
+  Neighbourhood: string;
+  POBoxNumber: string;
+  PostalCode: string;
+  Province: string;
+  ProvinceCode: string;
+  ProvinceName: string;
+  SecondaryStreet: string;
+  SortingNumber1: string;
+  SortingNumber2: string;
+  Street: string;
+  SubBuilding: string;
+  Type: string;
 }
 
 const loqateLanguage = (language: string): string => {
@@ -27,20 +97,12 @@ interface Item {
 }
 
 const useStyles = makeStyles({
-  root: (props: any) => ({
-    backgroundColor: 'white',
-    boxShadow: '0px 0px 25px rgba(0, 0, 0, 0.08)',
+  listPosition: (props: any) => ({
     position: 'absolute',
     top: props.top,
     left: props.left,
     width: props.width,
-    listStyleType: 'none',
   }),
-  option: {
-    cursor: 'pointer',
-    marginTop: 4,
-    marginBottom: 4,
-  },
 });
 
 const AddressSearch = (props: Props): JSX.Element => {
@@ -52,12 +114,15 @@ const AddressSearch = (props: Props): JSX.Element => {
     apiKey,
     listClassname,
     listItemClassname,
-    inputComponent,
+    inputClassname,
+    components,
   } = props;
   const [suggestions, setSuggestions] = useState<any[]>([]);
 
-  const inputRef = useRef<HTMLInputElement>(null);
-  const rect = inputRef?.current?.getBoundingClientRect();
+  const anchorRef = useRef<HTMLInputElement>(null);
+  const rect = document.body
+    .getElementsByClassName('react-loqate-list-anchor')[0]
+    ?.getBoundingClientRect();
 
   const classes = useStyles({
     top: rect?.bottom || 0,
@@ -74,7 +139,7 @@ const AddressSearch = (props: Props): JSX.Element => {
       if (res.Items.length) setSuggestions([]);
       onSelect(res.Items[0]);
     } else {
-      const value = inputRef.current?.value || '';
+      const value = anchorRef.current?.value || '';
       const sugs = await find(value, sug.Id);
       setSuggestions(sugs);
     }
@@ -121,27 +186,32 @@ const AddressSearch = (props: Props): JSX.Element => {
     }
   };
 
-  const InputComponent = inputComponent || 'input';
+  const Input = components?.Input || DefaultInput;
+  const List = components?.List || DefaultList;
+  const ListItem = components?.ListItem || DefaultListItem;
 
   return (
     <>
-      <InputComponent onChange={handleChange} ref={inputRef} />
+      <Input
+        className={clsx(inputClassname, 'react-loqate-list-anchor')}
+        onChange={handleChange}
+      />
       <Portal container={document.body}>
         <ClickAwayListener onClickAway={() => setSuggestions([])}>
-          <ul
+          <List
             hidden={!suggestions.length}
-            className={clsx(classes.root, listClassname)}
+            className={clsx(classes.listPosition, listClassname)}
           >
             {suggestions.map(sug => (
-              <li
+              <ListItem
                 key={sug.Id}
                 onClick={() => selectSuggestion(sug)}
-                className={clsx(classes.option, listItemClassname)}
+                className={listItemClassname}
               >
                 {sug.Text} {sug.Description}
-              </li>
+              </ListItem>
             ))}
-          </ul>
+          </List>
         </ClickAwayListener>
       </Portal>
     </>
