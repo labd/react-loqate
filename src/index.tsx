@@ -125,7 +125,7 @@ const AddressSearch = (props: Props): JSX.Element => {
     ?.getBoundingClientRect();
 
   const classes = useStyles({
-    top: rect?.bottom || 0,
+    top: rect?.y + rect?.height + window.scrollY || 0,
     left: rect?.left || 0,
     width: rect?.width || undefined,
   });
