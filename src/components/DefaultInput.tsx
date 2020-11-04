@@ -17,7 +17,13 @@ const DefaultInput = (
   const { className, ...rest } = props;
   const classes = useStyles();
 
-  return <input className={clsx(classes.input, className)} {...rest} />;
+  return (
+    <input
+      className={clsx(classes.input, className)}
+      data-testid="default-input"
+      {...rest}
+    />
+  );
 };
 
 export default DefaultInput;
