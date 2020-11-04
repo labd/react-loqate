@@ -21,9 +21,9 @@ const DefaultList = forwardRef(
     return (
       <ul
         className={clsx(classes.list, className)}
+        data-testid="default-list"
         {...rest}
         ref={ref}
-        data-testid="default-list"
       />
     );
   }

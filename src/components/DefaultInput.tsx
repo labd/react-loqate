@@ -20,8 +20,8 @@ const DefaultInput = (
   return (
     <input
       className={clsx(classes.input, className)}
-      {...rest}
       data-testid="default-input"
+      {...rest}
     />
   );
 };
