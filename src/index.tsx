@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import DefaultInput from './components/DefaultInput';
 import DefaultList from './components/DefaultList';
 import DefaultListItem from './components/DefaultListItem';
+import axios, { AxiosResponse } from 'axios';
 
 interface Props {
   locale: string;
@@ -133,13 +134,13 @@ const AddressSearch = (props: Props): JSX.Element => {
   const selectSuggestion = async (sug: Item) => {
     if (sug.Type === 'Address') {
       const url = `https://api.addressy.com/Capture/Interactive/Retrieve/v1/json3.ws?Key=${apiKey}&Id=${sug.Id}`;
-      const res = await fetch(url).then((response: Response) =>
-        response.json()
-      );
+      const res = await axios
+        .get(url)
+        .then((response: AxiosResponse) => response.data);
       if (res.Items.length) setSuggestions([]);
       onSelect(res.Items[0]);
     } else {
-      const value = anchorRef.current?.value || '';
+      const value = anchorRef.current?.value || ''; 
       const sugs = await find(value, sug.Id);
       setSuggestions(sugs);
     }
@@ -166,9 +167,9 @@ const AddressSearch = (props: Props): JSX.Element => {
       textString;
 
     try {
-      const res = await fetch(url).then((response: Response) =>
-        response.json()
-      );
+      const res = await axios
+        .get(url)
+        .then((response: AxiosResponse) => response.data);
       if (res?.Items) return res.Items;
     } catch (err) {
       console.error(err);
@@ -207,6 +208,7 @@ const AddressSearch = (props: Props): JSX.Element => {
                 key={sug.Id}
                 onClick={() => selectSuggestion(sug)}
                 className={listItemClassname}
+                data-testid={`default-list-item-${sug.Id}`}
               >
                 {sug.Text} {sug.Description}
               </ListItem>

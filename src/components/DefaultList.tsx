@@ -18,7 +18,14 @@ const DefaultList = forwardRef(
     const { className, ...rest } = props;
     const classes = useStyles();
 
-    return <ul className={clsx(classes.list, className)} {...rest} ref={ref} />;
+    return (
+      <ul
+        className={clsx(classes.list, className)}
+        {...rest}
+        ref={ref}
+        data-testid="default-list"
+      />
+    );
   }
 );
 
