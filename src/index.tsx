@@ -140,7 +140,7 @@ const AddressSearch = (props: Props): JSX.Element => {
       if (res.Items.length) setSuggestions([]);
       onSelect(res.Items[0]);
     } else {
-      const value = anchorRef.current?.value || ''; 
+      const value = anchorRef.current?.value || '';
       const sugs = await find(value, sug.Id);
       setSuggestions(sugs);
     }
