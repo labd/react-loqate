@@ -203,9 +203,9 @@ const AddressSearch = (props: Props): JSX.Element => {
             hidden={!suggestions.length}
             className={clsx(classes.listPosition, listClassname)}
           >
-            {suggestions.map(sug => (
+            {suggestions.map((sug, i) => (
               <ListItem
-                key={sug.Id}
+                key={sug.Id + i}
                 onClick={() => selectSuggestion(sug)}
                 className={listItemClassname}
                 data-testid={`default-list-item-${sug.Id}`}
