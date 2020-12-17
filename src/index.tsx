@@ -6,7 +6,7 @@ import DefaultList from './components/DefaultList';
 import DefaultListItem from './components/DefaultListItem';
 import axios, { AxiosResponse } from 'axios';
 
-interface Props {
+export interface Props {
   locale: string;
   apiKey: string;
   countries?: string[];
@@ -21,7 +21,7 @@ interface Props {
 interface Components {
   Input?: ComponentType;
   List?: ComponentType;
-  ListItem?: ComponentType;
+  ListItem?: ComponentType<{ suggestion: Item }>;
 }
 
 export interface Address {
@@ -89,7 +89,7 @@ const loqateLanguage = (language: string): string => {
   return languageCode;
 };
 
-interface Item {
+export interface Item {
   Id: string;
   Description: string;
   Type: string;
@@ -119,6 +119,7 @@ const AddressSearch = (props: Props): JSX.Element => {
     components,
   } = props;
   const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [value, setValue] = useState('');
 
   const anchorRef = useRef<HTMLInputElement>(null);
   const rect = document.body
@@ -178,7 +179,7 @@ const AddressSearch = (props: Props): JSX.Element => {
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const addressSearch = e.target.value;
-
+    setValue(addressSearch);
     if (addressSearch === '') {
       setSuggestions([]);
     } else {
@@ -196,6 +197,7 @@ const AddressSearch = (props: Props): JSX.Element => {
       <Input
         className={clsx(inputClassname, 'react-loqate-list-anchor')}
         onChange={handleChange}
+        value={value}
       />
       <Portal container={document.body}>
         <ClickAwayListener onClickAway={() => setSuggestions([])}>
@@ -209,6 +211,8 @@ const AddressSearch = (props: Props): JSX.Element => {
                 onClick={() => selectSuggestion(sug)}
                 className={listItemClassname}
                 data-testid={`default-list-item-${sug.Id}`}
+                value={value}
+                suggestion={sug}
               >
                 {sug.Text} {sug.Description}
               </ListItem>
