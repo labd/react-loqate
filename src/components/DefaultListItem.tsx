@@ -26,11 +26,15 @@ const DefaultListItem = (
 
   return (
     <li className={clsx(classes.listItem, className)} {...rest}>
-      <>
-        {before}
-        <strong>{match}</strong>
-        {after}
-      </>
+      {result?.length === 4 ? (
+        <>
+          {before}
+          <strong>{match}</strong>
+          {after}
+        </>
+      ) : (
+        search
+      )}
     </li>
   );
 };
