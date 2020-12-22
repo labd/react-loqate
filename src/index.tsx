@@ -121,13 +121,11 @@ const AddressSearch = (props: Props): JSX.Element => {
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const [value, setValue] = useState('');
 
-  const anchorRef = useRef<HTMLInputElement>(null);
-  const rect = document.body
-    .getElementsByClassName('react-loqate-list-anchor')[0]
-    ?.getBoundingClientRect();
+  const anchorRef = useRef<HTMLDivElement>(null);
+  const rect = anchorRef.current?.getBoundingClientRect();
 
   const classes = useStyles({
-    top: rect?.y + rect?.height + window.scrollY || 0,
+    top: rect ? rect.y + rect.height + window.scrollY : 0,
     left: rect?.left || 0,
     width: rect?.width || undefined,
   });
@@ -141,7 +139,6 @@ const AddressSearch = (props: Props): JSX.Element => {
       if (res.Items.length) setSuggestions([]);
       onSelect(res.Items[0]);
     } else {
-      const value = anchorRef.current?.value || '';
       const sugs = await find(value, sug.Id);
       setSuggestions(sugs);
     }
@@ -194,11 +191,13 @@ const AddressSearch = (props: Props): JSX.Element => {
 
   return (
     <>
-      <Input
-        className={clsx(inputClassname, 'react-loqate-list-anchor')}
-        onChange={handleChange}
-        value={value}
-      />
+      <div ref={anchorRef}>
+        <Input
+          className={clsx(inputClassname)}
+          onChange={handleChange}
+          value={value}
+        />
+      </div>
       <Portal container={document.body}>
         <ClickAwayListener onClickAway={() => setSuggestions([])}>
           <List
