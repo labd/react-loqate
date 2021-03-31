@@ -17,7 +17,10 @@ const DefaultListItem = (
   const { className, value, children, suggestion, ...rest } = props;
   const classes = useStyles();
 
-  const regex = new RegExp(`(.*)(${value?.toString().replace(/\W/g, '')})(.*)`, 'i');
+  const regex = new RegExp(
+    `(.*)(${value?.toString().replace(/\W/g, '')})(.*)`,
+    'i'
+  );
 
   const search = `${suggestion.Text} ${suggestion.Description}`;
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
-import AddressSearch, { Props } from '../src';
+import AddressSearch, { Address, Props } from '../src';
 
 const meta: Meta = {
   title: 'Welcome',
@@ -20,7 +20,8 @@ const meta: Meta = {
 export default meta;
 
 const Template: Story<Props> = props => {
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<Address>();
+
   return (
     <>
       <AddressSearch {...props} onSelect={setResult} />
@@ -36,6 +37,6 @@ export const Default = Template.bind({});
 Default.args = {
   // We need to prefix with STORYBOOK, otherwise Storybook will ignore the variable
   apiKey: process.env.STORYBOOK_API_KEY ?? '',
-  countries: ['US'],
+  countries: ['US', 'GB'],
   locale: 'en_US',
 };

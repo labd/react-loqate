@@ -1,10 +1,16 @@
-import React, { ChangeEvent, ComponentType, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  ComponentType,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { ClickAwayListener, makeStyles, Portal } from '@material-ui/core';
 import clsx from 'clsx';
 import DefaultInput from './components/DefaultInput';
 import DefaultList from './components/DefaultList';
 import DefaultListItem from './components/DefaultListItem';
-import axios, { AxiosResponse } from 'axios';
+import Loqate from './utils/Loqate';
 
 export interface Props {
   locale: string;
@@ -13,6 +19,7 @@ export interface Props {
   limit?: number;
   onSelect: (address: Address) => void;
   components?: Components;
+  className?: string;
   inputClassname?: string;
   listClassname?: string;
   listItemClassname?: string;
@@ -92,7 +99,7 @@ const loqateLanguage = (language: string): string => {
 export interface Item {
   Id: string;
   Description: string;
-  Type: string;
+  Type: 'Address' | 'Postcode' | 'Residential';
   Text: string;
   Highlight: string;
 }
@@ -106,18 +113,21 @@ const useStyles = makeStyles({
   }),
 });
 
-const AddressSearch = (props: Props): JSX.Element => {
+function AddressSearch(props: Props) {
   const {
     locale,
     countries,
     onSelect,
     limit,
     apiKey,
+    className,
     listClassname,
     listItemClassname,
     inputClassname,
     components,
   } = props;
+  const loqate = useMemo(() => Loqate.create(apiKey), [apiKey]);
+
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const [value, setValue] = useState('');
 
@@ -130,48 +140,41 @@ const AddressSearch = (props: Props): JSX.Element => {
     width: rect?.width || undefined,
   });
 
-  const selectSuggestion = async (sug: Item) => {
-    if (sug.Type === 'Address') {
-      const url = `https://api.addressy.com/Capture/Interactive/Retrieve/v1/json3.ws?Key=${apiKey}&Id=${sug.Id}`;
-      const res = await axios
-        .get(url)
-        .then((response: AxiosResponse) => response.data);
-      if (res.Items.length) setSuggestions([]);
-      onSelect(res.Items[0]);
-    } else {
-      const sugs = await find(value, sug.Id);
-      setSuggestions(sugs);
+  async function selectSuggestion({ Type, Id }: Item) {
+    if (Type === 'Address') {
+      const { data } = await loqate.retrieve(Id);
+      const { Items = [] } = data;
+
+      if (Items.length) {
+        setSuggestions([]);
+      }
+
+      onSelect(Items[0]);
+      return;
     }
-  };
+
+    const items = await find(value, Id);
+    setSuggestions(items);
+  }
 
   const find = async (text: string, containerId?: string) => {
-    const baseUrl = `https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws`;
-    const countriesString = countries?.length
-      ? `&Countries=${countries.join(',')}`
-      : '';
-    const limitString = limit ? `&limit=${limit}` : '';
-    const keyString = `?Key=${apiKey}`;
-    const textString = `&Text=${text}`;
-    const containerString = containerId ? `&Container=${containerId}` : '';
-    const languageString = `&Language=${loqateLanguage(locale)}`;
-
-    const url =
-      baseUrl +
-      keyString +
-      limitString +
-      countriesString +
-      languageString +
-      containerString +
-      textString;
-
     try {
-      const res = await axios
-        .get(url)
-        .then((response: AxiosResponse) => response.data);
-      if (res?.Items) return res.Items;
+      const { data } = await loqate.find({
+        countries,
+        limit,
+        text,
+        containerId,
+        language: loqateLanguage(locale),
+      });
+
+      if (data?.Items) {
+        return data.Items;
+      }
     } catch (err) {
       console.error(err);
     }
+
+    return [];
   };
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -191,7 +194,11 @@ const AddressSearch = (props: Props): JSX.Element => {
 
   return (
     <>
-      <div ref={anchorRef}>
+      <div
+        ref={anchorRef}
+        className={className}
+        data-testid="loqate-address-search"
+      >
         <Input
           className={clsx(inputClassname)}
           onChange={handleChange}
@@ -221,6 +228,6 @@ const AddressSearch = (props: Props): JSX.Element => {
       </Portal>
     </>
   );
-};
+}
 
 export default AddressSearch;

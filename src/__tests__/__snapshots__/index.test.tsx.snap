@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: AddressSearch render default 1`] = `
+<body>
+  <div>
+    <div
+      data-testid="loqate-address-search"
+    >
+      <input
+        class="makeStyles-input-8"
+        data-testid="default-input"
+        value=""
+      />
+    </div>
+  </div>
+  <ul
+    class="makeStyles-list-9 makeStyles-listPosition-6 makeStyles-listPosition-7"
+    data-testid="default-list"
+    hidden=""
+  />
+</body>
+`;
+
+exports[`Component: AddressSearch with classname 1`] = `
+<body>
+  <div>
+    <div
+      class="some-classname"
+      data-testid="loqate-address-search"
+    >
+      <input
+        class="makeStyles-input-12"
+        data-testid="default-input"
+        value=""
+      />
+    </div>
+  </div>
+  <ul
+    class="makeStyles-list-13 makeStyles-listPosition-10 makeStyles-listPosition-11"
+    data-testid="default-list"
+    hidden=""
+  />
+</body>
+`;
+
+exports[`Component: AddressSearch with custom input component 1`] = `
+<body>
+  <div>
+    <div
+      data-testid="loqate-address-search"
+    >
+      <input
+        class=""
+        data-testid="custom-input"
+        value=""
+      />
+    </div>
+  </div>
+  <ul
+    class="makeStyles-list-16 makeStyles-listPosition-14 makeStyles-listPosition-15"
+    data-testid="default-list"
+    hidden=""
+  />
+</body>
+`;
