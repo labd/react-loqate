@@ -1,8 +1,8 @@
 import React from 'react';
 import { server } from './server';
 import AddressSearch from '../index';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { selection } from './selection';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { selection } from './__fixtures__/selection';
 import '@testing-library/jest-dom/extend-expect';
 
 describe('Component: AddressSearch', () => {
@@ -49,5 +49,47 @@ describe('Component: AddressSearch', () => {
       expect(mockedOnSelect.mock.calls.length).toBe(1);
       expect(result).toEqual(selection.Items[0]);
     });
+  });
+
+  test('render default', async () => {
+    const component = render(
+      <AddressSearch locale="en_GB" apiKey="1234" onSelect={jest.fn()} />
+    );
+
+    expect(component.baseElement).toMatchSnapshot();
+  });
+
+  test('with classname', async () => {
+    const { baseElement, getByTestId } = render(
+      <AddressSearch
+        locale="en_GB"
+        apiKey="1234"
+        onSelect={jest.fn()}
+        className="some-classname"
+      />
+    );
+
+    const wrapper = getByTestId('loqate-address-search');
+
+    expect(wrapper.className).toBe('some-classname');
+    expect(baseElement).toMatchSnapshot();
+  });
+
+  test('with custom input component', async () => {
+    const { baseElement, getByTestId } = render(
+      <AddressSearch
+        locale="en_GB"
+        apiKey="1234"
+        onSelect={jest.fn()}
+        components={{
+          Input: props => <input data-testid="custom-input" {...props} />,
+        }}
+      />
+    );
+
+    const wrapper = getByTestId('custom-input');
+
+    expect(baseElement).toMatchSnapshot();
+    expect(wrapper).toBeDefined();
   });
 });
