@@ -17,6 +17,7 @@ You must [polyfill fetch](https://www.npmjs.com/package/whatwg-fetch).
 | onSelect          | (address) => void                   | yes      | address => console.log(address)     | Callback with for Loqate response        |
 | countries         | string[]                            | no       | ["GB", "NL"]                        | Countries to search in                   |
 | limit             | number                              | no       | 10                                  | Number of options to show                |
+| className         | string                              | no       | "address-search-box"                | Classname for the component wrapper      |
 | inputClassname    | string                              | no       | "address-input"                     | Classname for the input                  |
 | listClassname     | string                              | no       | "address-options"                   | Classname for the list                   |
 | listItemClassname | string                              | no       | "address-option"                    | Classname for the list items             |
@@ -47,6 +48,7 @@ const AddressSearchInput = (props): JSX.Element => {
   apiKey="AA11-AA11-AA11-AA11"
   countries={['GB']}
   components={{ Input: AddressSearchInput }}
+  className="address-search-box"
   listItemClassname="list-item"
   onSelect={address => console.log(address)}
 />;
