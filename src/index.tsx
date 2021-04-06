@@ -23,6 +23,7 @@ export interface Props {
   inputClassname?: string;
   listClassname?: string;
   listItemClassname?: string;
+  inline?: boolean;
 }
 
 interface Components {
@@ -125,6 +126,7 @@ function AddressSearch(props: Props) {
     listItemClassname,
     inputClassname,
     components,
+    inline,
   } = props;
   const loqate = useMemo(() => Loqate.create(apiKey), [apiKey]);
 
@@ -177,56 +179,56 @@ function AddressSearch(props: Props) {
     return [];
   };
 
-  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const addressSearch = e.target.value;
-    setValue(addressSearch);
-    if (addressSearch === '') {
+  const handleChange = async ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const { value: search } = target;
+
+    setValue(search);
+
+    if (search === '') {
       setSuggestions([]);
-    } else {
-      const sugs = await find(addressSearch);
-      setSuggestions(sugs);
+      return;
     }
+
+    const suggestions = await find(search);
+    setSuggestions(suggestions);
   };
 
-  const Input = components?.Input || DefaultInput;
-  const List = components?.List || DefaultList;
-  const ListItem = components?.ListItem || DefaultListItem;
+  const Input = components?.Input ?? DefaultInput;
+  const List = components?.List ?? DefaultList;
+  const ListItem = components?.ListItem ?? DefaultListItem;
 
   return (
-    <>
-      <div
-        ref={anchorRef}
-        className={className}
-        data-testid="loqate-address-search"
-      >
-        <Input
-          className={clsx(inputClassname)}
-          onChange={handleChange}
-          value={value}
-        />
-      </div>
-      <Portal container={document.body}>
+    <div ref={anchorRef} className={className} data-testid="react-loqate">
+      <Input
+        className={clsx(inputClassname)}
+        onChange={handleChange}
+        value={value}
+        data-testid="react-loqate-input"
+      />
+
+      <Portal container={document.body} disablePortal={inline}>
         <ClickAwayListener onClickAway={() => setSuggestions([])}>
           <List
             hidden={!suggestions.length}
             className={clsx(classes.listPosition, listClassname)}
+            data-testid="react-loqate-list"
           >
-            {suggestions.map((sug, i) => (
+            {suggestions.map((suggestion, i) => (
               <ListItem
-                key={sug.Id + i}
-                onClick={() => selectSuggestion(sug)}
+                key={suggestion.Id + i}
+                onClick={() => selectSuggestion(suggestion)}
                 className={listItemClassname}
-                data-testid={`default-list-item-${sug.Id}`}
+                data-testid={`react-loqate-list-item-${suggestion.Id}`}
                 value={value}
-                suggestion={sug}
+                suggestion={suggestion}
               >
-                {sug.Text} {sug.Description}
+                {suggestion.Text} {suggestion.Description}
               </ListItem>
             ))}
           </List>
         </ClickAwayListener>
       </Portal>
-    </>
+    </div>
   );
 }
 

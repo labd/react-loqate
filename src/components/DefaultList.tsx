@@ -14,7 +14,10 @@ const useStyles = makeStyles({
 });
 
 const DefaultList = forwardRef(
-  (props: OlHTMLAttributes<HTMLUListElement>, ref: Ref<any>): JSX.Element => {
+  (
+    props: OlHTMLAttributes<HTMLUListElement>,
+    ref: Ref<HTMLUListElement>
+  ): JSX.Element => {
     const { className, ...rest } = props;
     const classes = useStyles();
 

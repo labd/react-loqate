@@ -1,9 +1,15 @@
 import React from 'react';
 import { server } from './server';
 import AddressSearch from '../index';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { selection } from './__fixtures__/selection';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { selection } from './__fixtures__/selection';
 
 describe('Component: AddressSearch', () => {
   beforeAll(() => server.listen());
@@ -11,43 +17,47 @@ describe('Component: AddressSearch', () => {
   afterAll(() => server.close());
 
   test('basic functionality', async () => {
-    let result: any = undefined;
-    const mockedOnSelect = jest.fn(address => {
-      result = address;
-    });
+    const onSelectFn = jest.fn();
 
-    render(
+    const { getByTestId, findByTestId } = render(
       <AddressSearch
         locale="en_GB"
         apiKey="1234"
-        onSelect={mockedOnSelect}
+        onSelect={onSelectFn}
         limit={10}
       />
     );
 
-    expect(screen.getByTestId('default-input')).toBeDefined();
+    const input = getByTestId('react-loqate-input');
 
-    const input = screen.getByTestId('default-input');
-    fireEvent.change(input, { target: { value: 'a' } });
+    expect(input).toBeDefined();
+
+    act(() => {
+      fireEvent.change(input, { target: { value: 'a' } });
+    });
 
     await waitFor(() => {
-      const input = screen.getByTestId('default-input');
       expect(input).toHaveValue('a');
     });
 
-    expect(screen.findByTestId('default-list')).toBeDefined();
-
-    const list = await screen.findByTestId('default-list');
-    expect(list.childNodes).toHaveLength(10);
-
-    const firstListItem = screen.getByTestId(
-      'default-list-item-GB|RM|A|21415581'
-    );
-    fireEvent.click(firstListItem);
+    const list = await findByTestId('react-loqate-list');
 
     await waitFor(() => {
-      expect(mockedOnSelect.mock.calls.length).toBe(1);
-      expect(result).toEqual(selection.Items[0]);
+      expect(list).toBeDefined();
+      expect(list.childNodes).toHaveLength(10);
+    });
+
+    const firstListItem = await screen.findByTestId(
+      'react-loqate-list-item-GB|RM|A|21415581'
+    );
+
+    act(() => {
+      fireEvent.click(firstListItem);
+    });
+
+    await waitFor(() => {
+      expect(onSelectFn.mock.calls.length).toBe(1);
+      expect(onSelectFn).toHaveBeenCalledWith(selection.Items[0]);
     });
   });
 
@@ -69,7 +79,7 @@ describe('Component: AddressSearch', () => {
       />
     );
 
-    const wrapper = getByTestId('loqate-address-search');
+    const wrapper = getByTestId('react-loqate');
 
     expect(wrapper.className).toBe('some-classname');
     expect(baseElement).toMatchSnapshot();
@@ -82,7 +92,7 @@ describe('Component: AddressSearch', () => {
         apiKey="1234"
         onSelect={jest.fn()}
         components={{
-          Input: props => <input data-testid="custom-input" {...props} />,
+          Input: props => <input {...props} data-testid="custom-input" />,
         }}
       />
     );
@@ -91,5 +101,171 @@ describe('Component: AddressSearch', () => {
 
     expect(baseElement).toMatchSnapshot();
     expect(wrapper).toBeDefined();
+  });
+
+  test('with portal results', async () => {
+    const { getByTestId, findByTestId } = render(
+      <AddressSearch
+        locale="en_GB"
+        apiKey="some-key"
+        onSelect={jest.fn()}
+        limit={5}
+      />
+    );
+
+    const input = getByTestId('react-loqate-input');
+
+    expect(input).toBeDefined();
+
+    act(() => {
+      fireEvent.change(input, { target: { value: 'a' } });
+    });
+
+    await waitFor(() => {
+      expect(input).toHaveValue('a');
+    });
+
+    const list = await findByTestId('react-loqate-list');
+
+    await waitFor(() => {
+      expect(list).toBeDefined();
+      expect(list.childNodes).toHaveLength(10);
+    });
+
+    const wrapper = getByTestId('react-loqate');
+
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper).not.toContainElement(list);
+  });
+
+  test('with inline results', async () => {
+    const onSelectFn = jest.fn();
+
+    const { getByTestId, findByTestId } = render(
+      <AddressSearch
+        locale="en_GB"
+        apiKey="some-key"
+        onSelect={onSelectFn}
+        limit={5}
+        inline
+      />
+    );
+
+    const input = getByTestId('react-loqate-input');
+
+    expect(input).toBeDefined();
+
+    act(() => {
+      fireEvent.change(input, { target: { value: 'a' } });
+    });
+
+    await waitFor(() => {
+      expect(input).toHaveValue('a');
+    });
+
+    const list = await findByTestId('react-loqate-list');
+
+    await waitFor(() => {
+      expect(list).toBeDefined();
+      expect(list.childNodes).toHaveLength(10);
+    });
+
+    const firstListItem = await screen.findByTestId(
+      'react-loqate-list-item-GB|RM|A|21415581'
+    );
+
+    act(() => {
+      fireEvent.click(firstListItem);
+    });
+
+    const wrapper = getByTestId('react-loqate');
+
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper).toContainElement(list);
+
+    await waitFor(() => {
+      expect(onSelectFn.mock.calls.length).toBe(1);
+      expect(onSelectFn).toHaveBeenCalledWith(selection.Items[0]);
+    });
+  });
+
+  test('click away listener', async () => {
+    const { getByTestId, findByTestId } = render(
+      <AddressSearch
+        locale="en_GB"
+        apiKey="some-key"
+        onSelect={jest.fn()}
+        limit={5}
+        inline
+      />
+    );
+
+    const input = getByTestId('react-loqate-input');
+
+    expect(input).toBeDefined();
+
+    act(() => {
+      fireEvent.change(input, { target: { value: 'a' } });
+    });
+
+    await waitFor(() => {
+      expect(input).toHaveValue('a');
+    });
+
+    const list = await findByTestId('react-loqate-list');
+
+    await waitFor(() => {
+      expect(list).toBeDefined();
+      expect(list.childNodes).toHaveLength(10);
+    });
+
+    act(() => {
+      fireEvent.click(input);
+    });
+
+    await waitFor(() => {
+      expect(list.childNodes).toHaveLength(0);
+      expect(list.hidden).toBe(true);
+    });
+  });
+
+  test('inline click away listener', async () => {
+    const { getByTestId, findByTestId } = render(
+      <AddressSearch
+        locale="en_GB"
+        apiKey="some-key"
+        onSelect={jest.fn()}
+        limit={5}
+        inline
+      />
+    );
+
+    const input = getByTestId('react-loqate-input');
+
+    expect(input).toBeDefined();
+
+    act(() => {
+      fireEvent.change(input, { target: { value: 'a' } });
+    });
+
+    await waitFor(() => {
+      expect(input).toHaveValue('a');
+    });
+
+    const list = await findByTestId('react-loqate-list');
+
+    await waitFor(() => {
+      expect(list).toBeDefined();
+      expect(list.childNodes).toHaveLength(10);
+    });
+
+    act(() => {
+      fireEvent.click(input);
+    });
+
+    await waitFor(() => {
+      expect(list.childNodes).toHaveLength(0);
+      expect(list.hidden).toBe(true);
+    });
   });
 });
