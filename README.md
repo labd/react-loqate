@@ -23,6 +23,7 @@ You must [polyfill fetch](https://www.npmjs.com/package/whatwg-fetch).
 | listItemClassname | string                              | no       | "address-option"                    | Classname for the list items             |
 | components        | see [Customization](#Customization) | no       | see [Customization](#Customization) | Components to overwrite the default ones |
 | inline            | boolean                             | no       | true                                | Render results inline with the input     |
+| debounce          | number                              | no       | 100                                 | Debounce the calls to the Loqate API     |
 
 ### Customization
 
@@ -53,5 +54,6 @@ const AddressSearchInput = (props): JSX.Element => {
   listItemClassname="list-item"
   onSelect={address => console.log(address)}
   inline
+  debounce={100}
 />;
 ```
