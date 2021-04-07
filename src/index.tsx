@@ -100,7 +100,7 @@ const loqateLanguage = (language: string): string => {
 export interface Item {
   Id: string;
   Description: string;
-  Type: 'Address' | 'Postcode' | 'Residential';
+  Type: 'Address' | 'Postcode' | 'Residential' | 'Street';
   Text: string;
   Highlight: string;
 }
