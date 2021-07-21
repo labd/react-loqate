@@ -22,6 +22,7 @@ You must [polyfill fetch](https://www.npmjs.com/package/whatwg-fetch).
 | listClassname     | string                              | no       | "address-options"                   | Classname for the list                   |
 | listItemClassname | string                              | no       | "address-option"                    | Classname for the list items             |
 | components        | see [Customization](#Customization) | no       | see [Customization](#Customization) | Components to overwrite the default ones |
+| inline            | boolean                             | no       | true                                | Render results inline with the input     |
 
 ### Customization
 
@@ -51,5 +52,6 @@ const AddressSearchInput = (props): JSX.Element => {
   className="address-search-box"
   listItemClassname="list-item"
   onSelect={address => console.log(address)}
+  inline
 />;
 ```
