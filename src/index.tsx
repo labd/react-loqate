@@ -11,6 +11,7 @@ import DefaultInput from './components/DefaultInput';
 import DefaultList from './components/DefaultList';
 import DefaultListItem from './components/DefaultListItem';
 import Loqate from './utils/Loqate';
+import useDebounceEffect from './utils/useDebounceEffect';
 
 export interface Props {
   locale: string;
@@ -24,6 +25,7 @@ export interface Props {
   listClassname?: string;
   listItemClassname?: string;
   inline?: boolean;
+  debounce?: number;
 }
 
 interface Components {
@@ -127,6 +129,7 @@ function AddressSearch(props: Props) {
     inputClassname,
     components,
     inline,
+    debounce,
   } = props;
   const loqate = useMemo(() => Loqate.create(apiKey), [apiKey]);
 
@@ -159,7 +162,7 @@ function AddressSearch(props: Props) {
     setSuggestions(items);
   }
 
-  const find = async (text: string, containerId?: string) => {
+  async function find(text: string, containerId?: string) {
     try {
       const { data } = await loqate.find({
         countries,
@@ -177,21 +180,26 @@ function AddressSearch(props: Props) {
     }
 
     return [];
-  };
+  }
 
-  const handleChange = async ({ target }: ChangeEvent<HTMLInputElement>) => {
+  async function handleChange({ target }: ChangeEvent<HTMLInputElement>) {
     const { value: search } = target;
 
     setValue(search);
+  }
 
-    if (search === '') {
-      setSuggestions([]);
-      return;
-    }
+  useDebounceEffect(
+    () => {
+      if (value === '') {
+        setSuggestions([]);
+        return;
+      }
 
-    const suggestions = await find(search);
-    setSuggestions(suggestions);
-  };
+      find(value).then(setSuggestions);
+    },
+    debounce,
+    [value]
+  );
 
   const Input = components?.Input ?? DefaultInput;
   const List = components?.List ?? DefaultList;
