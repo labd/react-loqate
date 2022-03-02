@@ -127,7 +127,7 @@ describe('Component: AddressSearch', () => {
         apiKey="1234"
         onSelect={jest.fn()}
         components={{
-          Input: props => <input {...props} data-testid="custom-input" />,
+          Input: (props) => <input {...props} data-testid="custom-input" />,
           List: forwardRef(
             (
               props: OlHTMLAttributes<HTMLUListElement>,
@@ -136,7 +136,7 @@ describe('Component: AddressSearch', () => {
               return <ul {...props} data-testid="custom-list" ref={ref} />;
             }
           ),
-          ListItem: props => <li {...props} data-testid="custom-list-item" />,
+          ListItem: (props) => <li {...props} data-testid="custom-list-item" />,
         }}
       />
     );

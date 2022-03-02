@@ -23,7 +23,7 @@ class Loqate {
       params: {
         Key: key,
       },
-      paramsSerializer: params =>
+      paramsSerializer: (params) =>
         qs.stringify(params, {
           arrayFormat: 'comma',
         }),
