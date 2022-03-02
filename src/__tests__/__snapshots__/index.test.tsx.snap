@@ -7,16 +7,17 @@ exports[`Component: AddressSearch render default 1`] = `
       data-testid="react-loqate"
     >
       <input
-        class="makeStyles-input-8"
+        class="react-loqate-input"
         data-testid="react-loqate-input"
         value=""
       />
     </div>
   </div>
   <ul
-    class="makeStyles-list-9 makeStyles-listPosition-6 makeStyles-listPosition-7"
+    class="react-loqate-default-list"
     data-testid="react-loqate-list"
     hidden=""
+    style="position: absolute; top: 0px; left: 0px; width: 0px;"
   />
 </body>
 `;
@@ -29,21 +30,22 @@ exports[`Component: AddressSearch with classname 1`] = `
       data-testid="react-loqate"
     >
       <input
-        class="makeStyles-input-12"
+        class="react-loqate-input"
         data-testid="react-loqate-input"
         value=""
       />
     </div>
   </div>
   <ul
-    class="makeStyles-list-13 makeStyles-listPosition-10 makeStyles-listPosition-11"
+    class="react-loqate-default-list"
     data-testid="react-loqate-list"
     hidden=""
+    style="position: absolute; top: 0px; left: 0px; width: 0px;"
   />
 </body>
 `;
 
-exports[`Component: AddressSearch with custom input component 1`] = `
+exports[`Component: AddressSearch with custom components 1`] = `
 <body>
   <div>
     <div
@@ -57,9 +59,9 @@ exports[`Component: AddressSearch with custom input component 1`] = `
     </div>
   </div>
   <ul
-    class="makeStyles-list-16 makeStyles-listPosition-14 makeStyles-listPosition-15"
-    data-testid="react-loqate-list"
+    data-testid="custom-list"
     hidden=""
+    style="position: absolute; top: 0px; left: 0px; width: 0px;"
   />
 </body>
 `;
@@ -69,16 +71,17 @@ exports[`Component: AddressSearch with inline results 1`] = `
   data-testid="react-loqate"
 >
   <input
-    class="makeStyles-input-24"
+    class="react-loqate-input"
     data-testid="react-loqate-input"
     value="a"
   />
   <ul
-    class="makeStyles-list-25 makeStyles-listPosition-22 makeStyles-listPosition-23"
+    class="react-loqate-default-list"
     data-testid="react-loqate-list"
+    style="position: absolute; top: 0px; left: 0px; width: 0px;"
   >
     <li
-      class="makeStyles-listItem-26"
+      class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|A|21415581"
     >
       Piccardy Flat, Koolabar, Upper Frog Street Tenby, S
@@ -88,7 +91,7 @@ exports[`Component: AddressSearch with inline results 1`] = `
       70 7JD
     </li>
     <li
-      class="makeStyles-listItem-26"
+      class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|WHITCHURCH---STREET-ST._MARYS--PICCADILLY"
     >
       Piccadilly St. Marys Street Whitchurch, SY13 1RB - 2 
@@ -98,7 +101,7 @@ exports[`Component: AddressSearch with inline results 1`] = `
       ddresses
     </li>
     <li
-      class="makeStyles-listItem-26"
+      class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|TAMWORTH-PICCADILLY"
     >
       Piccadilly, Tamworth, B78 174 
@@ -108,7 +111,7 @@ exports[`Component: AddressSearch with inline results 1`] = `
       ddresses
     </li>
     <li
-      class="makeStyles-listItem-26"
+      class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|CARDIFF---CLOSE-PICCA"
     >
       Picca Close Cardiff, CF5 - 128 
@@ -118,7 +121,7 @@ exports[`Component: AddressSearch with inline results 1`] = `
       ddresses
     </li>
     <li
-      class="makeStyles-listItem-26"
+      class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|BRADFORD----PICCADILLY"
     >
       Piccadilly Bradford, BD1 - 116 
@@ -128,7 +131,7 @@ exports[`Component: AddressSearch with inline results 1`] = `
       ddresses
     </li>
     <li
-      class="makeStyles-listItem-26"
+      class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|COWBRIDGE-LLANBLETHIAN---PICCADILLY"
     >
       Piccadilly Llanblethian, Cowbridge, CF71 7JL - 19 
@@ -138,7 +141,7 @@ exports[`Component: AddressSearch with inline results 1`] = `
       ddresses
     </li>
     <li
-      class="makeStyles-listItem-26"
+      class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|MONTROSE----PICCADILLY"
     >
       Piccadilly Montrose, DD10 8TH - 13 
@@ -148,7 +151,7 @@ exports[`Component: AddressSearch with inline results 1`] = `
       ddresses
     </li>
     <li
-      class="makeStyles-listItem-26"
+      class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|DONCASTER-BENTLEY---PICCADILLY"
     >
       Piccadilly Bentley, Doncaster, DN5 0BQ - 2 
@@ -158,7 +161,7 @@ exports[`Component: AddressSearch with inline results 1`] = `
       ddresses
     </li>
     <li
-      class="makeStyles-listItem-26"
+      class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|GRIMSBY-NEW_WALTHAM---PICCADILLY"
     >
       Piccadilly New Waltham, Grimsby, DN36 4YQ - 4 
@@ -168,7 +171,7 @@ exports[`Component: AddressSearch with inline results 1`] = `
       ddresses
     </li>
     <li
-      class="makeStyles-listItem-26"
+      class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|STROUD----PICCADILLY"
     >
       Piccadilly Stroud, GL5 1HB - 2 
@@ -186,7 +189,7 @@ exports[`Component: AddressSearch with portal results 1`] = `
   data-testid="react-loqate"
 >
   <input
-    class="makeStyles-input-19"
+    class="react-loqate-input"
     data-testid="react-loqate-input"
     value="a"
   />

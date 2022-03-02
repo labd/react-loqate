@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react';
 import AddressSearch, { Address, Props } from '../src';
 
 const meta: Meta = {
-  title: 'Welcome',
+  title: 'Loqate Address Search',
   component: AddressSearch,
   argTypes: {
     children: {
@@ -24,7 +24,7 @@ const Template: Story<Props> = props => {
 
   return (
     <>
-      <AddressSearch {...props} onSelect={setResult} />
+      <AddressSearch {...props} onSelect={setResult} inline={true} />
       <pre>{JSON.stringify(result, null, 2)}</pre>
     </>
   );

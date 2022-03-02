@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { ClickAwayListener, makeStyles, Portal } from '@material-ui/core';
+import { ClickAwayListener, Portal } from '@mui/base';
 import clsx from 'clsx';
 import DefaultInput from './components/DefaultInput';
 import DefaultList from './components/DefaultList';
@@ -21,9 +21,11 @@ export interface Props {
   onSelect: (address: Address) => void;
   components?: Components;
   className?: string;
-  inputClassname?: string;
-  listClassname?: string;
-  listItemClassname?: string;
+  classes?: {
+    input?: string;
+    list?: string;
+    listItem?: string;
+  };
   inline?: boolean;
   debounce?: number;
 }
@@ -107,15 +109,6 @@ export interface Item {
   Highlight: string;
 }
 
-const useStyles = makeStyles({
-  listPosition: (props: any) => ({
-    position: 'absolute',
-    top: props.top,
-    left: props.left,
-    width: props.width,
-  }),
-});
-
 function AddressSearch(props: Props) {
   const {
     locale,
@@ -124,9 +117,7 @@ function AddressSearch(props: Props) {
     limit,
     apiKey,
     className,
-    listClassname,
-    listItemClassname,
-    inputClassname,
+    classes,
     components,
     inline,
     debounce,
@@ -138,12 +129,6 @@ function AddressSearch(props: Props) {
 
   const anchorRef = useRef<HTMLDivElement>(null);
   const rect = anchorRef.current?.getBoundingClientRect();
-
-  const classes = useStyles({
-    top: rect ? rect.y + rect.height + window.scrollY : 0,
-    left: rect?.left || 0,
-    width: rect?.width || undefined,
-  });
 
   async function selectSuggestion({ Type, Id }: Item) {
     if (Type === 'Address') {
@@ -208,7 +193,7 @@ function AddressSearch(props: Props) {
   return (
     <div ref={anchorRef} className={className} data-testid="react-loqate">
       <Input
-        className={clsx(inputClassname)}
+        className={clsx(classes?.input)}
         onChange={handleChange}
         value={value}
         data-testid="react-loqate-input"
@@ -217,15 +202,21 @@ function AddressSearch(props: Props) {
       <Portal container={document.body} disablePortal={inline}>
         <ClickAwayListener onClickAway={() => setSuggestions([])}>
           <List
+            style={{
+              position: 'absolute',
+              top: rect ? (rect.y ?? 0) + rect.height + window.scrollY : 0,
+              left: rect?.left ?? 0,
+              width: rect?.width ?? undefined,
+            }}
             hidden={!suggestions.length}
-            className={clsx(classes.listPosition, listClassname)}
+            className={classes?.list}
             data-testid="react-loqate-list"
           >
             {suggestions.map((suggestion, i) => (
               <ListItem
                 key={suggestion.Id + i}
                 onClick={() => selectSuggestion(suggestion)}
-                className={listItemClassname}
+                className={classes?.listItem}
                 data-testid={`react-loqate-list-item-${suggestion.Id}`}
                 value={value}
                 suggestion={suggestion}
