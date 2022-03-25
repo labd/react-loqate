@@ -42,10 +42,10 @@ class Loqate {
     });
   }
 
-  public find(query: FindQuery) {
+  public async find(query: FindQuery) {
     const { text, countries = [], containerId, language, limit } = query;
 
-    return this._httpClient.get(LOQATE_FIND_URL, {
+    const response = await this._httpClient.get(LOQATE_FIND_URL, {
       params: {
         Text: text,
         Countries: countries,
@@ -54,6 +54,13 @@ class Loqate {
         language,
       },
     });
+
+    const error = response?.data?.Items.find((e: any) => e.Error);
+    if (error) {
+      throw new Error(`Loqate error: ${JSON.stringify(error)}`);
+    }
+
+    return response;
   }
 }
 

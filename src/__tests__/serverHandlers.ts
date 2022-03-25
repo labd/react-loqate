@@ -33,3 +33,23 @@ export const handlers = [
     }
   ),
 ];
+
+export const errorHandler = rest.get(
+  `${LOQATE_BASE_URL}/${LOQATE_FIND_URL}`,
+  async (_req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        Items: [
+          {
+            Error: '2',
+            Description: 'Unknown key',
+            Cause: 'The key you are using to access the service was not found.',
+            Resolution:
+              'Please check that the key is correct. It should be in the form AA11-AA11-AA11-AA11.',
+          },
+        ],
+      })
+    );
+  }
+);

@@ -148,20 +148,16 @@ function AddressSearch(props: Props) {
   }
 
   async function find(text: string, containerId?: string) {
-    try {
-      const { data } = await loqate.find({
-        countries,
-        limit,
-        text,
-        containerId,
-        language: loqateLanguage(locale),
-      });
+    const { data } = await loqate.find({
+      countries,
+      limit,
+      text,
+      containerId,
+      language: loqateLanguage(locale),
+    });
 
-      if (data?.Items) {
-        return data.Items;
-      }
-    } catch (err) {
-      console.error(err);
+    if (data?.Items) {
+      return data.Items;
     }
 
     return [];

@@ -2,6 +2,7 @@ import Loqate from '../Loqate';
 import { server } from '../../__tests__/server';
 import { selection } from '../../__tests__/__fixtures__/selection';
 import { suggestions } from '../../__tests__/__fixtures__/suggestions';
+import { errorHandler } from '../../__tests__/serverHandlers';
 
 describe('Loqate', () => {
   beforeAll(() => server.listen());
@@ -38,6 +39,26 @@ describe('Loqate', () => {
       });
 
       expect(data).toEqual(suggestions);
+    });
+
+    it('should throw loqate errors', async () => {
+      server.use(errorHandler);
+
+      const loqate = Loqate.create('some-key');
+
+      await expect(async () => {
+        await loqate.find({
+          text: 'some-text',
+          language: 'some-language',
+          countries: ['GB', 'US'],
+          limit: 10,
+          containerId: 'some-container-id',
+        });
+      }).rejects.toThrowError(
+        new Error(
+          'Loqate error: {"Error":"2","Description":"Unknown key","Cause":"The key you are using to access the service was not found.","Resolution":"Please check that the key is correct. It should be in the form AA11-AA11-AA11-AA11."}'
+        )
+      );
     });
   });
 });
