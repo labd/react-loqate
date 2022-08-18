@@ -21,7 +21,7 @@ describe('Component: AddressSearch', () => {
 
     const { getByTestId, findByTestId } = render(
       <AddressSearch
-        locale="en_GB"
+        locale="en-GB"
         apiKey="1234"
         onSelect={onSelectFn}
         limit={10}
@@ -63,7 +63,7 @@ describe('Component: AddressSearch', () => {
 
   test('render default', async () => {
     const component = render(
-      <AddressSearch locale="en_GB" apiKey="1234" onSelect={jest.fn()} />
+      <AddressSearch locale="en-GB" apiKey="1234" onSelect={jest.fn()} />
     );
 
     expect(component.baseElement).toMatchSnapshot();
@@ -72,7 +72,7 @@ describe('Component: AddressSearch', () => {
   test('with classname', async () => {
     const { baseElement, getByTestId } = render(
       <AddressSearch
-        locale="en_GB"
+        locale="en-GB"
         apiKey="1234"
         onSelect={jest.fn()}
         className="some-classname"
@@ -88,7 +88,7 @@ describe('Component: AddressSearch', () => {
   test('with custom classes', async () => {
     const { getByTestId, findByTestId } = render(
       <AddressSearch
-        locale="en_GB"
+        locale="en-GB"
         apiKey="some-key"
         onSelect={jest.fn()}
         limit={5}
@@ -123,7 +123,7 @@ describe('Component: AddressSearch', () => {
   test('with custom components', async () => {
     const { baseElement, getByTestId, findByTestId } = render(
       <AddressSearch
-        locale="en_GB"
+        locale="en-GB"
         apiKey="1234"
         onSelect={jest.fn()}
         components={{
@@ -165,7 +165,7 @@ describe('Component: AddressSearch', () => {
   test('with portal results', async () => {
     const { getByTestId, findByTestId } = render(
       <AddressSearch
-        locale="en_GB"
+        locale="en-GB"
         apiKey="some-key"
         onSelect={jest.fn()}
         limit={5}
@@ -202,7 +202,7 @@ describe('Component: AddressSearch', () => {
 
     const { getByTestId, findByTestId } = render(
       <AddressSearch
-        locale="en_GB"
+        locale="en-GB"
         apiKey="some-key"
         onSelect={onSelectFn}
         limit={5}
@@ -251,7 +251,7 @@ describe('Component: AddressSearch', () => {
   test('click away listener', async () => {
     const { getByTestId, findByTestId } = render(
       <AddressSearch
-        locale="en_GB"
+        locale="en-GB"
         apiKey="some-key"
         onSelect={jest.fn()}
         limit={5}
@@ -291,7 +291,7 @@ describe('Component: AddressSearch', () => {
   test('inline click away listener', async () => {
     const { getByTestId, findByTestId } = render(
       <AddressSearch
-        locale="en_GB"
+        locale="en-GB"
         apiKey="some-key"
         onSelect={jest.fn()}
         limit={5}

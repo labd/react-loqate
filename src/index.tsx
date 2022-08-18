@@ -97,7 +97,7 @@ export interface Address {
 }
 
 const loqateLanguage = (language: string): string => {
-  const [languageCode] = language.split('_');
+  const [languageCode] = language.replace('_', '-').split('-');
   return languageCode;
 };
 
