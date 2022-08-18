@@ -8,12 +8,22 @@ This is a React implementation of the loqate APIs. It features an input, typing 
 
 You must [polyfill fetch](https://www.npmjs.com/package/whatwg-fetch).
 
+### Example
+
+```javascript
+<AddressSearch
+  locale="en-GB"
+  apiKey="AA11-AA11-AA11-AA11"
+  onSelect={(address) => console.log(address)}
+/>
+```
+
 ### Props
 
 | name       | type                                               | required | example                             | description                              |
 | ---------- | -------------------------------------------------- | -------- | ----------------------------------- | ---------------------------------------- |
 | apiKey     | string                                             | yes      | "AA11-AA11-AA11-AA11"               | Loqate API key                           |
-| locale     | string                                             | yes      | "en_GB"                             | Language to be used                      |
+| locale     | string                                             | yes      | "en-GB"                             | Language to be used                      |
 | onSelect   | (address) => void                                  | yes      | address => console.log(address)     | Callback with for Loqate response        |
 | countries  | string[]                                           | no       | ["GB", "NL"]                        | Countries to search in                   |
 | limit      | number                                             | no       | 10                                  | Number of options to show                |
@@ -47,13 +57,13 @@ const AddressSearchInput = (props): JSX.Element => {
 };
 
 <AddressSearch
-  locale="en_GB"
+  locale="en-GB"
   apiKey="AA11-AA11-AA11-AA11"
   countries={['GB']}
   components={{ Input: AddressSearchInput }}
   className="address-search-box"
   classes={{ list: 'styled-list' }}
-  onSelect={address => console.log(address)}
+  onSelect={(address) => console.log(address)}
   inline
   debounce={100}
 />;
