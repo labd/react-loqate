@@ -1,6 +1,11 @@
 # Change log
 
-## [1.0.0]
+## [1.0.2]
+
+- accept locale formatted as both `en_GB` and `en-gb`. Including the iso standard of `en-GB` in readme.
+- update readme
+
+## [1.0.1]
 
 ### Breaking
 
