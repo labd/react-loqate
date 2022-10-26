@@ -19,7 +19,12 @@ const DefaultListItem = (
   const [before, match, after] = result?.slice(1) ?? ['', '', ''];
 
   return (
-    <li className={clsx('react-loqate-list-item', className)} {...rest}>
+    <li
+      className={clsx('react-loqate-list-item', className)}
+      aria-label={match}
+      tabIndex={0}
+      {...rest}
+    >
       {result?.length === 4 ? (
         <>
           {before}

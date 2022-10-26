@@ -1,3 +1,5 @@
+import { ClickAwayListener, Portal } from '@mui/base';
+import clsx from 'clsx';
 import React, {
   ChangeEvent,
   ComponentType,
@@ -5,8 +7,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { ClickAwayListener, Portal } from '@mui/base';
-import clsx from 'clsx';
 import DefaultInput from './components/DefaultInput';
 import DefaultList from './components/DefaultList';
 import DefaultListItem from './components/DefaultListItem';
@@ -212,6 +212,11 @@ function AddressSearch(props: Props) {
               <ListItem
                 key={suggestion.Id + i}
                 onClick={() => selectSuggestion(suggestion)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    selectSuggestion(suggestion);
+                  }
+                }}
                 className={classes?.listItem}
                 data-testid={`react-loqate-list-item-${suggestion.Id}`}
                 value={value}
