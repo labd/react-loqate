@@ -18,9 +18,10 @@ npm install react-loqate
 
 ```javascript
 import AddressSearch from 'react-loqate';
+// to use the default styles for the default components
+import 'react-loqate/dist/react-loqate.cjs.development.css';
 
 // ...
-
 <AddressSearch
   locale="en-GB"
   apiKey="AA11-AA11-AA11-AA11"
@@ -30,33 +31,32 @@ import AddressSearch from 'react-loqate';
 
 ### Props
 
-| name       | type                                                  | required | example                             | description                              |
-| ---------- | ----------------------------------------------------- | -------- | ----------------------------------- | ---------------------------------------- |
-| apiKey     | string                                                | yes      | "AA11-AA11-AA11-AA11"               | Loqate API key                           |
-| locale     | string                                                | yes      | "en-GB"                             | Language to be used                      |
-| onSelect   | (address) => void                                     | yes      | address => console.log(address)     | Callback with for Loqate response        |
-| countries  | string[]                                              | no       | ["GB", "NL"]                        | Countries to search in                   |
-| limit      | number                                                | no       | 10                                  | Number of options to show                |
-| className  | string                                                | no       | "address-search-box"                | Classname for the component wrapper      |
-| classes    | `{ input?: string, list?: string, listItem?: string}` | no       | { list: 'list' }                    | Classnames for the components            |
-| components | see [Customization](#Customization)                   | no       | see [Customization](#Customization) | Components to overwrite the default ones |
-| inline     | boolean                                               | no       | true                                | Render results inline with the input     |
-| debounce   | number                                                | no       | 100                                 | Debounce the calls to the Loqate API     |
+| name       | type                                                  | required | example                                                             | description                              |
+| ---------- | ----------------------------------------------------- | -------- | ------------------------------------------------------------------- | ---------------------------------------- |
+| apiKey     | string                                                | yes      | "AA11-AA11-AA11-AA11"                                               | Loqate API key                           |
+| locale     | string                                                | yes      | "en-GB"                                                             | Language to be used                      |
+| onSelect   | (address) => void                                     | yes      | address => console.log(address)                                     | Callback with for Loqate response        |
+| countries  | string[]                                              | no       | ["GB", "NL"]                                                        | Countries to search in                   |
+| limit      | number                                                | no       | 10                                                                  | Number of options to show                |
+| className  | string                                                | no       | "address-search-box"                                                | Classname for the component wrapper      |
+| classes    | `{ input?: string, list?: string, listItem?: string}` | no       | { list: 'list' }                                                    | Classnames for the components            |
+| components | see [Customization](#Customization)                   | no       | { Input: CustomInput, List: CustomList, ListItem: CustomListItem, } | Components to overwrite the default ones |
+| inline     | boolean                                               | no       | true                                                                | Render results inline with the input     |
+| debounce   | number                                                | no       | 100                                                                 | Debounce the calls to the Loqate API     |
 
 ### Customization
 
 You can either style the default input, list and listItem with their respective classes or replace them completely by passing in your own components in the components prop.
 
-List component must be able to accept a ref!
-All components must pass down their props!
+**List component must be able to accept a ref!**
+
+**All custom components must pass down their props!**
 
 ```javascript
 import React from 'react';
 import AddressSearch from 'react-loqate';
-// to use the default styles for the default components
-import 'react-loqate/dist/react-loqate.cjs.development.css';
 
-const AddressSearchInput = (props): JSX.Element => {
+const CustomInput = (props): JSX.Element => {
   return (
     <input
       placeholder={'start typing your address or postcode'}
@@ -70,7 +70,9 @@ const AddressSearchInput = (props): JSX.Element => {
   locale="en-GB"
   apiKey="AA11-AA11-AA11-AA11"
   countries={['GB']}
-  components={{ Input: AddressSearchInput }}
+  components={{
+    Input: CustomInput,
+  }}
   className="address-search-box"
   classes={{ list: 'styled-list' }}
   onSelect={(address) => console.log(address)}
