@@ -1,5 +1,10 @@
 # Change log
 
+## [1.1.0]
+
+- make DefaultListItem tab selectable
+- trigger Item select onKeyDown 'Enter'
+
 ## [1.0.2]
 
 - accept locale formatted as both `en_GB` and `en-gb`. Including the iso standard of `en-GB` in readme.
