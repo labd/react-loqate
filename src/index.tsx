@@ -193,6 +193,11 @@ function AddressSearch(props: Props) {
         onChange={handleChange}
         value={value}
         data-testid="react-loqate-input"
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            setSuggestions([]);
+          }
+        }}
       />
 
       <Portal container={document.body} disablePortal={inline}>
@@ -215,6 +220,9 @@ function AddressSearch(props: Props) {
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     selectSuggestion(suggestion);
+                  }
+                  if (e.key === 'Escape') {
+                    setSuggestions([]);
                   }
                 }}
                 className={classes?.listItem}
