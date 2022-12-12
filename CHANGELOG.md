@@ -1,5 +1,9 @@
 # Change log
 
+## [1.2.0]
+
+- clear suggestions list when pressing 'Escape' on input or list item
+
 ## [1.1.0]
 
 - make DefaultListItem tab selectable
