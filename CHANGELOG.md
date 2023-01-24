@@ -1,5 +1,9 @@
 # Change log
 
+## [1.3.0]
+
+- replace axios dependency with native fetch
+
 ## [1.2.0]
 
 - clear suggestions list when pressing 'Escape' on input or list item
