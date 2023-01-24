@@ -19,7 +19,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<Props> = props => {
+const Template: Story<Props> = (props) => {
   const [result, setResult] = useState<Address>();
 
   return (

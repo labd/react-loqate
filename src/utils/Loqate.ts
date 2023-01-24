@@ -1,5 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
-import qs from 'qs';
+import { Item } from '..';
 import {
   LOQATE_BASE_URL,
   LOQATE_FIND_URL,
@@ -15,47 +14,37 @@ interface FindQuery {
 }
 
 class Loqate {
-  public _httpClient: AxiosInstance;
+  constructor(public key: string, public baseUrl: string = LOQATE_BASE_URL) {}
 
-  constructor(public key: string, public baseUrl: string = LOQATE_BASE_URL) {
-    this._httpClient = axios.create({
-      baseURL: baseUrl,
-      params: {
-        Key: key,
-      },
-      paramsSerializer: (params) =>
-        qs.stringify(params, {
-          arrayFormat: 'comma',
-        }),
-    });
-  }
-
-  public static create(key: string, baseUrl: string = LOQATE_BASE_URL) {
+  public static create(key: string, baseUrl: string = LOQATE_BASE_URL): Loqate {
     return new Loqate(key, baseUrl);
   }
 
-  public retrieve(id: string) {
-    return this._httpClient.get(LOQATE_RETRIEVE_URL, {
-      params: {
-        Id: id,
-      },
-    });
+  public async retrieve(id: string): Promise<{ Items?: Item[] }> {
+    const params = new URLSearchParams({ Id: id, Key: this.key });
+    const url = `${this.baseUrl}/${LOQATE_RETRIEVE_URL}?${params.toString()}`;
+    return fetch(url).then<{ Items?: Item[] }>((r) => r.json());
   }
 
-  public async find(query: FindQuery) {
+  public async find(query: FindQuery): Promise<{ Items?: Item[] }> {
     const { text, countries = [], containerId, language, limit } = query;
 
-    const response = await this._httpClient.get(LOQATE_FIND_URL, {
-      params: {
-        Text: text,
-        Countries: countries,
-        Container: containerId,
-        limit,
-        language,
-      },
+    const params = new URLSearchParams({
+      Text: text,
+      Countries: countries.join(','),
+      language,
+      Key: this.key,
     });
+    if (containerId) {
+      params.set('Container', containerId);
+    }
+    if (limit) {
+      params.set('limit', limit.toString());
+    }
+    const url = `${this.baseUrl}/${LOQATE_FIND_URL}?${params.toString()}`;
+    const response = await fetch(url).then<{ Items?: Item[] }>((r) => r.json());
 
-    const error = response?.data?.Items.find((e: any) => e.Error);
+    const error = response?.Items?.find((item: any) => item.Error);
     if (error) {
       throw new Error(`Loqate error: ${JSON.stringify(error)}`);
     }

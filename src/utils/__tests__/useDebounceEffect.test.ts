@@ -1,9 +1,10 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useDebounceEffect from '../useDebounceEffect';
+import { describe, vi, it, expect } from 'vitest';
 
 describe('useDebounceEffect', () => {
   it('should debounce the effect', async () => {
-    const effectFn = jest.fn();
+    const effectFn = vi.fn();
     const delay = 100;
 
     const { rerender, waitFor } = renderHook(

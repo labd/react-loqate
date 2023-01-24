@@ -109,7 +109,7 @@ export interface Item {
   Highlight: string;
 }
 
-function AddressSearch(props: Props) {
+function AddressSearch(props: Props): JSX.Element {
   const {
     locale,
     countries,
@@ -124,31 +124,14 @@ function AddressSearch(props: Props) {
   } = props;
   const loqate = useMemo(() => Loqate.create(apiKey), [apiKey]);
 
-  const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [suggestions, setSuggestions] = useState<Item[]>([]);
   const [value, setValue] = useState('');
 
   const anchorRef = useRef<HTMLDivElement>(null);
   const rect = anchorRef.current?.getBoundingClientRect();
 
-  async function selectSuggestion({ Type, Id }: Item) {
-    if (Type === 'Address') {
-      const { data } = await loqate.retrieve(Id);
-      const { Items = [] } = data;
-
-      if (Items.length) {
-        setSuggestions([]);
-      }
-
-      onSelect(Items[0]);
-      return;
-    }
-
-    const items = await find(value, Id);
-    setSuggestions(items);
-  }
-
-  async function find(text: string, containerId?: string) {
-    const { data } = await loqate.find({
+  async function find(text: string, containerId?: string): Promise<Item[]> {
+    const { Items } = await loqate.find({
       countries,
       limit,
       text,
@@ -156,14 +139,28 @@ function AddressSearch(props: Props) {
       language: loqateLanguage(locale),
     });
 
-    if (data?.Items) {
-      return data.Items;
-    }
-
-    return [];
+    return Items ?? [];
   }
 
-  async function handleChange({ target }: ChangeEvent<HTMLInputElement>) {
+  async function selectSuggestion({ Type, Id }: Item): Promise<void> {
+    if (Type === 'Address') {
+      const { Items = [] } = await loqate.retrieve(Id);
+
+      if (Items.length) {
+        setSuggestions([]);
+      }
+
+      onSelect(Items[0] as unknown as Address);
+      return;
+    }
+
+    const items = await find(value, Id);
+    setSuggestions(items);
+  }
+
+  async function handleChange({
+    target,
+  }: ChangeEvent<HTMLInputElement>): Promise<void> {
     const { value: search } = target;
 
     setValue(search);
