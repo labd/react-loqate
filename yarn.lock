@@ -3645,6 +3645,16 @@
     semver "^7.3.2"
     tsutils "^3.17.1"
 
+"@vitest/coverage-c8@^0.28.1":
+  version "0.28.1"
+  resolved "https://registry.yarnpkg.com/@vitest/coverage-c8/-/coverage-c8-0.28.1.tgz#07e6938dc9713738e39c866186b2b135de2d1e65"
+  integrity sha512-h/5Te9wX/GFz5/8ett9bpDqMtV71XwbLc9kFafHBkM8zi5EixdmcTWl5h9JzzGMfdEQfmqIff3C0wzbMldDn7w==
+  dependencies:
+    c8 "^7.12.0"
+    picocolors "^1.0.0"
+    std-env "^3.3.1"
+    vitest "0.28.1"
+
 "@vitest/expect@0.28.1":
   version "0.28.1"
   resolved "https://registry.yarnpkg.com/@vitest/expect/-/expect-0.28.1.tgz#75e81973c907fe7516b78bcfdc99c6f6c07bf714"
@@ -5048,7 +5058,7 @@ bytes@3.1.2:
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.2.tgz#8b0beeb98605adf1b128fa4386403c009e0221a5"
   integrity sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==
 
-c8@^7.6.0:
+c8@^7.12.0, c8@^7.6.0:
   version "7.12.0"
   resolved "https://registry.yarnpkg.com/c8/-/c8-7.12.0.tgz#402db1c1af4af5249153535d1c84ad70c5c96b14"
   integrity sha512-CtgQrHOkyxr5koX1wEUmN/5cfDa2ckbHRA4Gy5LAL0zaCFtVWJS5++n+w4/sr2GWGerBxgTjpKeDclk/Qk6W/A==
@@ -14532,7 +14542,7 @@ vite-node@0.28.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vitest@^0.28.1:
+vitest@0.28.1, vitest@^0.28.1:
   version "0.28.1"
   resolved "https://registry.yarnpkg.com/vitest/-/vitest-0.28.1.tgz#a87656075e01436c887048efd83a5d32792ce890"
   integrity sha512-F6wAO3K5+UqJCCGt0YAl3Ila2f+fpBrJhl9n7qWEhREwfzQeXlMkkCqGqGtzBxCSa8kv5QHrkshX8AaPTXYACQ==
