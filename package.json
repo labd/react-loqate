@@ -21,7 +21,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "vitest --passWithNoTests",
-    "lint": "tsdx lint",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
@@ -30,7 +30,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "eslint"
     }
   },
   "prettier": {
