@@ -1,6 +1,6 @@
 import { rest } from 'msw';
-import { suggestions } from './__fixtures__/suggestions';
 import { selection } from './__fixtures__/selection';
+import { suggestions } from './__fixtures__/suggestions';
 
 import {
   LOQATE_BASE_URL,
@@ -32,6 +32,23 @@ export const handlers = [
       return res(ctx.status(401, 'Provide API key'));
     }
   ),
+
+  rest.get(`https://foo.bar/${LOQATE_FIND_URL}`, async (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        Items: [
+          {
+            Id: 'baz',
+            Type: 'Address',
+            Text: 'foo',
+            Highlight: '0-13',
+            Description: 'bar',
+          },
+        ],
+      })
+    );
+  }),
 ];
 
 export const errorHandler = rest.get(
