@@ -1,6 +1,8 @@
 {
+  "name": "react-loqate",
   "version": "1.3.0",
   "license": "MIT",
+  "author": "Bram Kaashoek",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "keywords": [
@@ -39,8 +41,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "react-loqate",
-  "author": "Bram Kaashoek",
+
   "module": "dist/react-loqate.esm.js",
   "size-limit": [
     {
@@ -53,38 +54,38 @@
     }
   ],
   "devDependencies": {
-    "@babel/core": "^7.20.12",
-    "@size-limit/preset-small-lib": "^8.1.2",
+    "@babel/core": "7.20.12",
+    "@size-limit/preset-small-lib": "8.1.2",
     "@storybook/addon-essentials": "6.5.15",
     "@storybook/addon-links": "6.5.15",
     "@storybook/addons": "6.5.15",
-    "@storybook/builder-webpack5": "^7.0.0-beta.32",
-    "@storybook/manager-webpack5": "^6.5.15",
+    "@storybook/builder-webpack5": "7.0.0-beta.32",
+    "@storybook/manager-webpack5": "6.5.15",
     "@storybook/react": "6.5.15",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/react-hooks": "^8.0.1",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
-    "@vitest/coverage-c8": "^0.28.1",
-    "autoprefixer": "^10.4.13",
-    "babel-loader": "^9.1.2",
-    "cssnano": "^5.1.14",
+    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/react": "14.0.0",
+    "@testing-library/react-hooks": "8.0.1",
+    "@types/react": "18.0.27",
+    "@types/react-dom": "18.0.10",
+    "@vitest/coverage-c8": "0.28.1",
+    "autoprefixer": "10.4.13",
+    "babel-loader": "9.1.2",
+    "cssnano": "5.1.14",
     "eslint-plugin-prettier": "4.2.1",
-    "husky": "^8.0.3",
-    "jsdom": "^21.1.0",
-    "msw": "^0.49.3",
-    "postcss": "^8.4.21",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-is": "^18.2.0",
-    "rollup-plugin-postcss": "^4.0.2",
-    "size-limit": "^8.1.2",
-    "ts-jest": "^29.0.5",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.4.1",
-    "typescript": "^4.9.4",
-    "vitest": "^0.28.1",
+    "husky": "8.0.3",
+    "jsdom": "21.1.0",
+    "msw": "0.49.3",
+    "postcss": "8.4.21",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-is": "18.2.0",
+    "rollup-plugin-postcss": "4.0.2",
+    "size-limit": "8.1.2",
+    "ts-jest": "29.0.5",
+    "tsdx": "0.14.1",
+    "tslib": "2.4.1",
+    "typescript": "4.9.4",
+    "vitest": "0.28.1",
     "webpack": "5"
   },
   "peerDependencies": {
@@ -92,8 +93,8 @@
     "react-dom": ">=17"
   },
   "dependencies": {
-    "@mui/base": "^5.0.0-alpha.114",
-    "clsx": "^1.2.1",
-    "cross-fetch": "^3.1.5"
+    "@mui/base": "5.0.0-alpha.114",
+    "clsx": "1.2.1",
+    "cross-fetch": "3.1.5"
   }
 }

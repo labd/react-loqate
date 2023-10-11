@@ -28,6 +28,7 @@ export interface Props {
   };
   inline?: boolean;
   debounce?: number;
+  apiUrl?: string;
 }
 
 interface Components {
@@ -121,8 +122,9 @@ function AddressSearch(props: Props): JSX.Element {
     components,
     inline,
     debounce,
+    apiUrl,
   } = props;
-  const loqate = useMemo(() => Loqate.create(apiKey), [apiKey]);
+  const loqate = useMemo(() => Loqate.create(apiKey, apiUrl), [apiKey]);
 
   const [suggestions, setSuggestions] = useState<Item[]>([]);
   const [value, setValue] = useState('');
