@@ -21,7 +21,7 @@ class Loqate {
   }
 
   public async retrieve(id: string): Promise<{ Items?: Item[] }> {
-    const params = new URLSearchParams({ Id: id, Key: this.key });
+    const params = new URLSearchParams({ Id: id, Key: this.key, field1format: '{Latitude}', field2format: '{Longitude}' });
     const url = `${this.baseUrl}/${LOQATE_RETRIEVE_URL}?${params.toString()}`;
     return fetch(url).then<{ Items?: Item[] }>((r) => r.json());
   }
