@@ -22,7 +22,10 @@
     "check": "pnpm lint && tsc",
     "dev": "storybook dev -p 6006",
     "lint": "eslint src && prettier --check .",
-    "test": "vitest --passWithNoTests"
+		"publish:ci": "pnpm build && pnpm changeset publish",
+    "test": "vitest --passWithNoTests",
+    "test:ci": "vitest run --passWithNoTests"
+
   },
   "husky": {
     "hooks": {
