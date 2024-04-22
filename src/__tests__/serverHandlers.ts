@@ -1,72 +1,67 @@
-import { rest } from 'msw';
-import { selection } from './__fixtures__/selection';
-import { suggestions } from './__fixtures__/suggestions';
+import { HttpResponse, http } from 'msw';
 
 import {
   LOQATE_BASE_URL,
   LOQATE_FIND_URL,
   LOQATE_RETRIEVE_URL,
 } from '../constants/loqate';
+import { selection } from './__fixtures__/selection';
+import { suggestions } from './__fixtures__/suggestions';
 
 export const handlers = [
-  rest.get(`${LOQATE_BASE_URL}/${LOQATE_FIND_URL}`, async (req, res, ctx) => {
-    const apiKey = req.url.searchParams.get('Key');
+  http.get(`${LOQATE_BASE_URL}/${LOQATE_FIND_URL}`, async ({ request }) => {
+    const url = new URL(request.url);
+    const apiKey = url.searchParams.get('Key');
 
-    if (apiKey) {
-      return res(ctx.status(200), ctx.json(suggestions));
+    if (!apiKey) {
+      return new HttpResponse('Provide API key', { status: 401 });
     }
-
-    return res(ctx.status(401, 'Provide API key'));
+    return HttpResponse.json(suggestions);
   }),
 
-  rest.get(
-    `${LOQATE_BASE_URL}/${LOQATE_RETRIEVE_URL}`,
-    async (req, res, ctx) => {
-      const apiKey = req.url.searchParams.get('Key');
-      const id = req.url.searchParams.get('Id');
+  http.get(`${LOQATE_BASE_URL}/${LOQATE_RETRIEVE_URL}`, async ({ request }) => {
+    const url = new URL(request.url);
+    const apiKey = url.searchParams.get('Key');
+    const id = url.searchParams.get('Id');
 
-      if (apiKey && id) {
-        return res(ctx.status(200), ctx.json(selection));
-      }
-
-      return res(ctx.status(401, 'Provide API key'));
+    if (!apiKey) {
+      return new HttpResponse('Provide API key', { status: 401 });
     }
-  ),
 
-  rest.get(`https://foo.bar/${LOQATE_FIND_URL}`, async (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        Items: [
-          {
-            Id: 'baz',
-            Type: 'Address',
-            Text: 'foo',
-            Highlight: '0-13',
-            Description: 'bar',
-          },
-        ],
-      })
-    );
+    if (!id) {
+      return new HttpResponse('Provide Id', { status: 400 });
+    }
+    return HttpResponse.json(selection);
+  }),
+
+  http.get(`https://foo.bar/${LOQATE_FIND_URL}`, async () => {
+    return HttpResponse.json({
+      Items: [
+        {
+          Id: 'baz',
+          Type: 'Address',
+          Text: 'foo',
+          Highlight: '0-13',
+          Description: 'bar',
+        },
+      ],
+    });
   }),
 ];
 
-export const errorHandler = rest.get(
+export const errorHandler = http.get(
   `${LOQATE_BASE_URL}/${LOQATE_FIND_URL}`,
-  async (_req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        Items: [
-          {
-            Error: '2',
-            Description: 'Unknown key',
-            Cause: 'The key you are using to access the service was not found.',
-            Resolution:
-              'Please check that the key is correct. It should be in the form AA11-AA11-AA11-AA11.',
-          },
-        ],
-      })
-    );
+  async () => {
+    return HttpResponse.json({
+      Items: [
+        {
+          Error: '2',
+          Description: 'Unknown key',
+          Cause: 'The key you are using to access the service was not found.',
+          Resolution:
+            'Please check that the key is correct. It should be in the form AA11-AA11-AA11-AA11.',
+        },
+      ],
+    });
   }
 );

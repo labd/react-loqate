@@ -1,4 +1,4 @@
-# React-Locate
+# React-Loqate
 
 This is a React implementation of the loqate APIs. It features an input, typing in which will result in a list of address options. Clicking an option will trigger your callback with that option.
 
@@ -19,7 +19,7 @@ npm install react-loqate
 ```javascript
 import AddressSearch from 'react-loqate';
 // to use the default styles for the default components
-import 'react-loqate/dist/react-loqate.cjs.development.css';
+import 'react-loqate/dist/index.css';
 
 // ...
 <AddressSearch

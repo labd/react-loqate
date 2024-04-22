@@ -1,15 +1,12 @@
-import Loqate from '../Loqate';
-import { server } from '../../__tests__/server';
+import { fetch } from 'cross-fetch';
+import { describe, expect, it } from 'vitest';
 import { selection } from '../../__tests__/__fixtures__/selection';
 import { suggestions } from '../../__tests__/__fixtures__/suggestions';
+import { server } from '../../__tests__/server';
 import { errorHandler } from '../../__tests__/serverHandlers';
-import { describe, beforeAll, afterEach, afterAll, it, expect } from 'vitest';
-import { fetch } from 'cross-fetch';
+import Loqate from '../Loqate';
 
 global.fetch = fetch;
-beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
-afterAll(() => server.close());
-afterEach(() => server.resetHandlers());
 
 describe('Loqate', () => {
   it('should initialize', () => {

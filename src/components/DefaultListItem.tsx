@@ -6,7 +6,7 @@ import './DefaultListItem.css';
 const DefaultListItem = (
   props: LiHTMLAttributes<HTMLLIElement> & { suggestion: Item }
 ): JSX.Element => {
-  const { className, value, children, suggestion, ...rest } = props;
+  const { className, value, suggestion, ...rest } = props;
 
   const regex = new RegExp(
     `(.*)(${value?.toString().replace(/\W/g, '')})(.*)`,
