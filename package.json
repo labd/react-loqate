@@ -22,15 +22,20 @@
     "check": "pnpm lint && tsc",
     "dev": "storybook dev -p 6006",
     "lint": "eslint src && prettier --check .",
-		"publish:ci": "pnpm build && pnpm changeset publish",
+    "prepare": "husky",
+    "publish:ci": "pnpm build && pnpm changeset publish",
     "test": "vitest --passWithNoTests",
     "test:ci": "vitest run --passWithNoTests"
-
   },
   "husky": {
     "hooks": {
       "pre-commit": "pnpm check"
     }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,json}": [
+      "prettier --write"
+    ]
   },
   "prettier": {
     "printWidth": 80,
@@ -60,8 +65,9 @@
     "@vitest/coverage-v8": "1.2.1",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-storybook": "0.8.0",
-    "husky": "8.0.3",
+    "husky": "9.0.11",
     "jsdom": "21.1.0",
+    "lint-staged": "^15.2.2",
     "msw": "2.2.14",
     "react": "18.2.0",
     "react-dom": "18.2.0",
