@@ -78,8 +78,8 @@
     "vitest": "1.2.1"
   },
   "peerDependencies": {
-    "react": ">=17",
-    "react-dom": ">=17"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "dependencies": {
     "@mui/base": "5.0.0-alpha.114",

@@ -80,3 +80,13 @@ const CustomInput = (props): JSX.Element => {
   debounce={100}
 />;
 ```
+
+### Contributing
+
+This codebases use [@changesets](https://github.com/changesets/changesets) for release and version management
+
+- Create a feature branch with new features / fixes
+- When your code changes are complete, add a changeset file to your feature branch using `pnpm changeset`
+- Create a PR to request your changes to be merged to main
+- After your PR is merged, GitHub actions will create a release PR or add your changeset to an existing release PR
+- When the release is ready merge the release branch. A new version will automatically be released.
