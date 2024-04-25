@@ -17,10 +17,13 @@ import {
   vi,
 } from 'vitest';
 import AddressSearch from '../index';
+import ErrorBoundary from './ErrorBoundary';
 import { selection } from './__fixtures__/selection';
 import { server } from './server';
+import { errorHandler } from './serverHandlers';
 global.fetch = fetch;
 
+console.error = vi.fn();
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
@@ -363,5 +366,28 @@ describe('Component: AddressSearch', () => {
       expect(list.childNodes).toHaveLength(0);
       expect(list.hidden).toBe(true);
     });
+  });
+
+  it('lets its errors be caught by an ErrorBoundary', async () => {
+    server.use(errorHandler);
+    const { baseElement, findByTestId, getByTestId } = render(
+      <ErrorBoundary>
+        <AddressSearch locale="en-GB" apiKey="1234" onSelect={vi.fn()} />
+      </ErrorBoundary>
+    );
+
+    const input = getByTestId('react-loqate-input');
+
+    act(() => {
+      fireEvent.change(input, { target: { value: 'a' } });
+    });
+
+    const errorNotification = await findByTestId('error-notification');
+
+    await waitFor(() => {
+      expect(errorNotification).toBeDefined();
+    });
+
+    expect(baseElement).toMatchSnapshot();
   });
 });

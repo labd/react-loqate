@@ -135,25 +135,49 @@ function AddressSearch(props: Props): JSX.Element {
 
   const [suggestions, setSuggestions] = useState<Item[]>([]);
   const [value, setValue] = useState('');
+  const [, setError] = useState(null);
 
   const anchorRef = useRef<HTMLDivElement>(null);
   const rect = anchorRef.current?.getBoundingClientRect();
 
   async function find(text: string, containerId?: string): Promise<Item[]> {
-    const { Items } = await loqate.find({
-      countries,
-      limit,
-      text,
-      containerId,
-      language: loqateLanguage(locale),
-    });
+    let Items: Item[] = [];
+    try {
+      const res = await loqate.find({
+        countries,
+        limit,
+        text,
+        containerId,
+        language: loqateLanguage(locale),
+      });
 
-    return Items ?? [];
+      if (res.Items) {
+        Items = res.Items;
+      }
+    } catch (e) {
+      // error needs to be thrown in the render in order to be caught by the ErrorBoundary
+      setError(() => {
+        throw e;
+      });
+    }
+
+    return Items;
   }
 
   async function selectSuggestion({ Type, Id }: Item): Promise<void> {
     if (Type === 'Address') {
-      const { Items = [] } = await loqate.retrieve(Id);
+      let Items: Item[] = [];
+      try {
+        const res = await loqate.retrieve(Id);
+        if (res.Items) {
+          Items = res.Items;
+        }
+      } catch (e) {
+        // error needs to be thrown in the render in order to be caught by the ErrorBoundary
+        setError(() => {
+          throw e;
+        });
+      }
 
       if (Items.length) {
         setSuggestions([]);

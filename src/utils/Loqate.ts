@@ -13,6 +13,8 @@ interface FindQuery {
   containerId?: string;
 }
 
+type LoqateResponse = { Items?: Item[] | ErrorItem[] };
+type LoqateNoErrorResponse = { Items?: Item[] };
 class Loqate {
   constructor(
     public key: string,
@@ -23,13 +25,14 @@ class Loqate {
     return new Loqate(key, baseUrl);
   }
 
-  public async retrieve(id: string): Promise<{ Items?: Item[] | ErrorItem[] }> {
+  public async retrieve(id: string): Promise<LoqateNoErrorResponse> {
     const params = new URLSearchParams({ Id: id, Key: this.key });
     const url = `${this.baseUrl}/${LOQATE_RETRIEVE_URL}?${params.toString()}`;
-    return fetch(url).then<{ Items?: Item[] | ErrorItem[] }>((r) => r.json());
+    const res = await fetch(url).then<LoqateResponse>((r) => r.json());
+    return this.handleErrors(res);
   }
 
-  public async find(query: FindQuery): Promise<{ Items?: Item[] }> {
+  public async find(query: FindQuery): Promise<LoqateNoErrorResponse> {
     const { text, countries = [], containerId, language, limit } = query;
 
     const params = new URLSearchParams({
@@ -45,17 +48,19 @@ class Loqate {
       params.set('limit', limit.toString());
     }
     const url = `${this.baseUrl}/${LOQATE_FIND_URL}?${params.toString()}`;
-    const response = await fetch(url).then<{ Items?: Item[] | ErrorItem[] }>(
-      (r) => r.json()
-    );
+    const response = await fetch(url).then<LoqateResponse>((r) => r.json());
 
-    const firstItem: Item | ErrorItem | undefined = response?.Items?.[0];
+    return this.handleErrors(response);
+  }
+
+  private handleErrors = (res: LoqateResponse): LoqateNoErrorResponse => {
+    const firstItem: Item | ErrorItem | undefined = res?.Items?.[0];
     if (firstItem && Object.hasOwn(firstItem, 'Error')) {
       throw new Error(`Loqate error: ${JSON.stringify(firstItem)}`);
     }
 
-    return response as { Items?: Item[] };
-  }
+    return res as LoqateNoErrorResponse;
+  };
 }
 
 export default Loqate;
