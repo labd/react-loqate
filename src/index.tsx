@@ -110,6 +110,13 @@ export interface Item {
   Highlight: string;
 }
 
+export interface ErrorItem {
+  Error: string;
+  Description: string;
+  Cause: string;
+  Resolution: string;
+}
+
 function AddressSearch(props: Props): JSX.Element {
   const {
     locale,
