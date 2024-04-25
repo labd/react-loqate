@@ -34,6 +34,18 @@ exports[`Component: AddressSearch > allows for alternative url 1`] = `
 </body>
 `;
 
+exports[`Component: AddressSearch > lets its errors be caught by an ErrorBoundary 1`] = `
+<body>
+  <div>
+    <h1
+      data-testid="error-notification"
+    >
+      Something went wrong.
+    </h1>
+  </div>
+</body>
+`;
+
 exports[`Component: AddressSearch > renders default 1`] = `
 <body>
   <div>
