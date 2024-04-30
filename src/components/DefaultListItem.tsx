@@ -21,7 +21,7 @@ const DefaultListItem = (
   return (
     <li
       className={clsx('react-loqate-list-item', className)}
-      aria-label={match}
+      aria-label={before + match + after}
       tabIndex={0}
       {...rest}
     >
