@@ -259,6 +259,7 @@ function AddressSearch(props: Props): JSX.Element {
                 data-testid={`react-loqate-list-item-${suggestion.Id}`}
                 value={value}
                 suggestion={suggestion}
+                tabIndex={i === 0 ? 0 : -1}
               >
                 {suggestion.Text} {suggestion.Description}
               </ListItem>
