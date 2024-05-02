@@ -5,6 +5,7 @@ import {
   screen,
   waitFor,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { fetch } from 'cross-fetch';
 import React, { OlHTMLAttributes, Ref, forwardRef } from 'react';
 import {
@@ -16,11 +17,12 @@ import {
   it,
   vi,
 } from 'vitest';
-import AddressSearch from '../index';
-import ErrorBoundary from './ErrorBoundary';
-import { selection } from './__fixtures__/selection';
-import { server } from './server';
-import { errorHandler } from './serverHandlers';
+import ErrorBoundary from './__tests__/ErrorBoundary';
+import { selection } from './__tests__/__fixtures__/selection';
+import { server } from './__tests__/server';
+import { errorHandler } from './__tests__/serverHandlers';
+import AddressSearch from './index';
+
 global.fetch = fetch;
 
 console.error = vi.fn();
@@ -288,7 +290,7 @@ describe('Component: AddressSearch', () => {
     });
   });
 
-  it.skip('can click away', async () => {
+  it('can click away', async () => {
     const { getByTestId, findByTestId } = render(
       <AddressSearch
         locale="en-GB"
@@ -328,7 +330,7 @@ describe('Component: AddressSearch', () => {
     });
   });
 
-  it.skip('can inline click away', async () => {
+  it('can inline click away', async () => {
     const { getByTestId, findByTestId } = render(
       <AddressSearch
         locale="en-GB"
@@ -365,6 +367,155 @@ describe('Component: AddressSearch', () => {
     await waitFor(() => {
       expect(list.childNodes).toHaveLength(0);
       expect(list.hidden).toBe(true);
+    });
+  });
+
+  it('uses escape to clear the input suggestions list', async () => {
+    const { getByTestId, findByTestId } = render(
+      <AddressSearch
+        locale="en-GB"
+        apiKey="some-key"
+        onSelect={vi.fn()}
+        limit={5}
+        inline
+      />
+    );
+
+    const input = getByTestId('react-loqate-input');
+
+    expect(input).toBeDefined();
+
+    act(() => {
+      fireEvent.change(input, { target: { value: 'a' } });
+    });
+
+    await waitFor(() => {
+      expect(input).toHaveValue('a');
+    });
+
+    const list = await findByTestId('react-loqate-list');
+
+    await waitFor(() => {
+      expect(list).toBeDefined();
+      expect(list.childNodes).toHaveLength(10);
+    });
+
+    act(() => {
+      fireEvent.keyDown(input, { key: 'Escape', code: 'Escape' });
+    });
+
+    await waitFor(() => {
+      expect(list.childNodes).toHaveLength(0);
+      expect(list.hidden).toBe(true);
+    });
+  });
+
+  it('uses tab to set focus on the first list item', async () => {
+    const { getByTestId, findByTestId } = render(
+      <AddressSearch
+        locale="en-GB"
+        apiKey="some-key"
+        onSelect={vi.fn()}
+        limit={5}
+        inline
+      />
+    );
+
+    const input = getByTestId('react-loqate-input');
+
+    expect(input).toBeDefined();
+
+    act(() => {
+      input.focus();
+      fireEvent.change(input, { target: { value: 'a' } });
+    });
+
+    await waitFor(() => {
+      expect(input).toHaveValue('a');
+      expect(input).toHaveFocus();
+    });
+
+    const list = await findByTestId('react-loqate-list');
+
+    await waitFor(() => {
+      expect(list).toBeDefined();
+      expect(list.childNodes).toHaveLength(10);
+    });
+
+    act(() => {
+      userEvent.tab();
+    });
+
+    const firstListItem = await screen.findByText(
+      /Piccardy Flat, Koolabar, Upper Frog Street/
+    );
+
+    await waitFor(() => {
+      expect(firstListItem).toHaveFocus();
+    });
+  });
+
+  it('uses the arrow keys to cycle through the list items', async () => {
+    const { getByTestId, findByTestId } = render(
+      <AddressSearch
+        locale="en-GB"
+        apiKey="some-key"
+        onSelect={vi.fn()}
+        limit={5}
+        inline
+      />
+    );
+
+    const input = getByTestId('react-loqate-input');
+
+    expect(input).toBeDefined();
+
+    act(() => {
+      input.focus();
+      fireEvent.change(input, { target: { value: 'a' } });
+    });
+
+    await waitFor(() => {
+      expect(input).toHaveValue('a');
+      expect(input).toHaveFocus();
+    });
+
+    const list = await findByTestId('react-loqate-list');
+
+    await waitFor(() => {
+      expect(list).toBeDefined();
+      expect(list.childNodes).toHaveLength(10);
+    });
+
+    act(() => {
+      userEvent.tab();
+    });
+
+    const firstListItem = await screen.findByText(
+      /Piccardy Flat, Koolabar, Upper Frog Street/
+    );
+
+    const secondListItem = firstListItem.nextSibling;
+
+    await waitFor(() => {
+      expect(firstListItem).toHaveFocus();
+    });
+
+    userEvent.keyboard('{arrowDown}');
+
+    await waitFor(() => {
+      expect(secondListItem).toHaveFocus();
+    });
+
+    userEvent.keyboard('{arrowUp}');
+    await waitFor(() => {
+      expect(firstListItem).toHaveFocus();
+    });
+
+    // check out of bounds
+    userEvent.keyboard('{arrowUp}');
+    await waitFor(() => {
+      expect(firstListItem).toHaveFocus();
     });
   });
 
