@@ -5,19 +5,16 @@ exports[`allows for alternative url 1`] = `
   <div>
     <input
       class="react-loqate-input"
-      data-testid="react-loqate-input"
       value="a"
     />
   </div>
   <ul
     class="react-loqate-default-list"
-    data-testid="react-loqate-list"
     style="position: absolute; top: 0px; left: 0px; width: 0px;"
   >
     <li
       aria-label="foo bar"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-baz"
       tabindex="0"
     >
       foo b
@@ -47,19 +44,16 @@ exports[`renders default 1`] = `
   <div>
     <input
       class="react-loqate-input"
-      data-testid="react-loqate-input"
       value="a"
     />
   </div>
   <ul
     class="react-loqate-default-list"
-    data-testid="react-loqate-list"
     style="position: absolute; top: 0px; left: 0px; width: 0px;"
   >
     <li
       aria-label="Piccardy Flat, Koolabar, Upper Frog Street Tenby, SA70 7JD"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|A|21415581"
       tabindex="0"
     >
       Piccardy Flat, Koolabar, Upper Frog Street Tenby, S
@@ -71,7 +65,6 @@ exports[`renders default 1`] = `
     <li
       aria-label="Piccadilly St. Marys Street Whitchurch, SY13 1RB - 2 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|WHITCHURCH---STREET-ST._MARYS--PICCADILLY"
       tabindex="-1"
     >
       Piccadilly St. Marys Street Whitchurch, SY13 1RB - 2 
@@ -83,7 +76,6 @@ exports[`renders default 1`] = `
     <li
       aria-label="Piccadilly, Tamworth, B78 174 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|TAMWORTH-PICCADILLY"
       tabindex="-1"
     >
       Piccadilly, Tamworth, B78 174 
@@ -95,7 +87,6 @@ exports[`renders default 1`] = `
     <li
       aria-label="Picca Close Cardiff, CF5 - 128 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|CARDIFF---CLOSE-PICCA"
       tabindex="-1"
     >
       Picca Close Cardiff, CF5 - 128 
@@ -107,7 +98,6 @@ exports[`renders default 1`] = `
     <li
       aria-label="Piccadilly Bradford, BD1 - 116 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|BRADFORD----PICCADILLY"
       tabindex="-1"
     >
       Piccadilly Bradford, BD1 - 116 
@@ -119,7 +109,6 @@ exports[`renders default 1`] = `
     <li
       aria-label="Piccadilly Llanblethian, Cowbridge, CF71 7JL - 19 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|COWBRIDGE-LLANBLETHIAN---PICCADILLY"
       tabindex="-1"
     >
       Piccadilly Llanblethian, Cowbridge, CF71 7JL - 19 
@@ -131,7 +120,6 @@ exports[`renders default 1`] = `
     <li
       aria-label="Piccadilly Montrose, DD10 8TH - 13 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|MONTROSE----PICCADILLY"
       tabindex="-1"
     >
       Piccadilly Montrose, DD10 8TH - 13 
@@ -143,7 +131,6 @@ exports[`renders default 1`] = `
     <li
       aria-label="Piccadilly Bentley, Doncaster, DN5 0BQ - 2 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|DONCASTER-BENTLEY---PICCADILLY"
       tabindex="-1"
     >
       Piccadilly Bentley, Doncaster, DN5 0BQ - 2 
@@ -155,7 +142,6 @@ exports[`renders default 1`] = `
     <li
       aria-label="Piccadilly New Waltham, Grimsby, DN36 4YQ - 4 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|GRIMSBY-NEW_WALTHAM---PICCADILLY"
       tabindex="-1"
     >
       Piccadilly New Waltham, Grimsby, DN36 4YQ - 4 
@@ -167,7 +153,6 @@ exports[`renders default 1`] = `
     <li
       aria-label="Piccadilly Stroud, GL5 1HB - 2 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|STROUD----PICCADILLY"
       tabindex="-1"
     >
       Piccadilly Stroud, GL5 1HB - 2 
@@ -303,18 +288,15 @@ exports[`renders with inline results 1`] = `
 >
   <input
     class="react-loqate-input"
-    data-testid="react-loqate-input"
     value="a"
   />
   <ul
     class="react-loqate-default-list"
-    data-testid="react-loqate-list"
     style="position: absolute; top: 0px; left: 0px; width: 0px;"
   >
     <li
       aria-label="Piccardy Flat, Koolabar, Upper Frog Street Tenby, SA70 7JD"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|A|21415581"
       tabindex="0"
     >
       Piccardy Flat, Koolabar, Upper Frog Street Tenby, S
@@ -326,7 +308,6 @@ exports[`renders with inline results 1`] = `
     <li
       aria-label="Piccadilly St. Marys Street Whitchurch, SY13 1RB - 2 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|WHITCHURCH---STREET-ST._MARYS--PICCADILLY"
       tabindex="-1"
     >
       Piccadilly St. Marys Street Whitchurch, SY13 1RB - 2 
@@ -338,7 +319,6 @@ exports[`renders with inline results 1`] = `
     <li
       aria-label="Piccadilly, Tamworth, B78 174 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|TAMWORTH-PICCADILLY"
       tabindex="-1"
     >
       Piccadilly, Tamworth, B78 174 
@@ -350,7 +330,6 @@ exports[`renders with inline results 1`] = `
     <li
       aria-label="Picca Close Cardiff, CF5 - 128 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|CARDIFF---CLOSE-PICCA"
       tabindex="-1"
     >
       Picca Close Cardiff, CF5 - 128 
@@ -362,7 +341,6 @@ exports[`renders with inline results 1`] = `
     <li
       aria-label="Piccadilly Bradford, BD1 - 116 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|BRADFORD----PICCADILLY"
       tabindex="-1"
     >
       Piccadilly Bradford, BD1 - 116 
@@ -374,7 +352,6 @@ exports[`renders with inline results 1`] = `
     <li
       aria-label="Piccadilly Llanblethian, Cowbridge, CF71 7JL - 19 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|COWBRIDGE-LLANBLETHIAN---PICCADILLY"
       tabindex="-1"
     >
       Piccadilly Llanblethian, Cowbridge, CF71 7JL - 19 
@@ -386,7 +363,6 @@ exports[`renders with inline results 1`] = `
     <li
       aria-label="Piccadilly Montrose, DD10 8TH - 13 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|MONTROSE----PICCADILLY"
       tabindex="-1"
     >
       Piccadilly Montrose, DD10 8TH - 13 
@@ -398,7 +374,6 @@ exports[`renders with inline results 1`] = `
     <li
       aria-label="Piccadilly Bentley, Doncaster, DN5 0BQ - 2 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|DONCASTER-BENTLEY---PICCADILLY"
       tabindex="-1"
     >
       Piccadilly Bentley, Doncaster, DN5 0BQ - 2 
@@ -410,7 +385,6 @@ exports[`renders with inline results 1`] = `
     <li
       aria-label="Piccadilly New Waltham, Grimsby, DN36 4YQ - 4 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|GRIMSBY-NEW_WALTHAM---PICCADILLY"
       tabindex="-1"
     >
       Piccadilly New Waltham, Grimsby, DN36 4YQ - 4 
@@ -422,7 +396,6 @@ exports[`renders with inline results 1`] = `
     <li
       aria-label="Piccadilly Stroud, GL5 1HB - 2 Addresses"
       class="react-loqate-list-item"
-      data-testid="react-loqate-list-item-GB|RM|ENG|STROUD----PICCADILLY"
       tabindex="-1"
     >
       Piccadilly Stroud, GL5 1HB - 2 
@@ -441,7 +414,6 @@ exports[`renders with portal results 1`] = `
 >
   <input
     class="react-loqate-input"
-    data-testid="react-loqate-input"
     value="a"
   />
 </div>

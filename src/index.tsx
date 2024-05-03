@@ -222,7 +222,6 @@ function AddressSearch(props: Props): JSX.Element {
         className={clsx(classes?.input)}
         onChange={handleChange}
         value={value}
-        data-testid="react-loqate-input"
         onKeyDown={(e) => {
           if (e.key === 'Escape') {
             setSuggestions([]);
@@ -241,7 +240,6 @@ function AddressSearch(props: Props): JSX.Element {
             }}
             hidden={!suggestions.length}
             className={classes?.list}
-            data-testid="react-loqate-list"
           >
             {suggestions.map((suggestion, i) => (
               <ListItem
@@ -256,7 +254,6 @@ function AddressSearch(props: Props): JSX.Element {
                   }
                 }}
                 className={classes?.listItem}
-                data-testid={`react-loqate-list-item-${suggestion.Id}`}
                 value={value}
                 suggestion={suggestion}
                 tabIndex={i === 0 ? 0 : -1}

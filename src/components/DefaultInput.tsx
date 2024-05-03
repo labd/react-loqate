@@ -12,7 +12,6 @@ const DefaultInput = forwardRef(
     return (
       <input
         className={clsx('react-loqate-input', className)}
-        data-testid="default-input"
         ref={ref}
         {...rest}
       />
