@@ -12,9 +12,8 @@ const DefaultList = forwardRef(
     return (
       <ul
         className={clsx('react-loqate-default-list', className)}
-        data-testid="default-list"
-        {...rest}
         ref={ref}
+        {...rest}
       />
     );
   }
