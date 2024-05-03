@@ -124,7 +124,6 @@ function AddressSearch(props: Props): JSX.Element {
     onSelect,
     limit,
     apiKey,
-    className,
     classes,
     components,
     inline,
@@ -137,7 +136,7 @@ function AddressSearch(props: Props): JSX.Element {
   const [value, setValue] = useState('');
   const [, setError] = useState(null);
 
-  const anchorRef = useRef<HTMLDivElement>(null);
+  const anchorRef = useRef<HTMLInputElement>(null);
   const rect = anchorRef.current?.getBoundingClientRect();
 
   async function find(text: string, containerId?: string): Promise<Item[]> {
@@ -217,8 +216,9 @@ function AddressSearch(props: Props): JSX.Element {
   const ListItem = components?.ListItem ?? DefaultListItem;
 
   return (
-    <div ref={anchorRef} className={className} data-testid="react-loqate">
+    <>
       <Input
+        ref={anchorRef}
         className={clsx(classes?.input)}
         onChange={handleChange}
         value={value}
@@ -267,7 +267,7 @@ function AddressSearch(props: Props): JSX.Element {
           </List>
         </ClickAwayListener>
       </Portal>
-    </div>
+    </>
   );
 }
 

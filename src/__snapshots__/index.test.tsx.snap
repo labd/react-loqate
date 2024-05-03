@@ -1,17 +1,13 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Component: AddressSearch > allows for alternative url 1`] = `
+exports[`allows for alternative url 1`] = `
 <body>
   <div>
-    <div
-      data-testid="react-loqate"
-    >
-      <input
-        class="react-loqate-input"
-        data-testid="react-loqate-input"
-        value="a"
-      />
-    </div>
+    <input
+      class="react-loqate-input"
+      data-testid="react-loqate-input"
+      value="a"
+    />
   </div>
   <ul
     class="react-loqate-default-list"
@@ -34,7 +30,7 @@ exports[`Component: AddressSearch > allows for alternative url 1`] = `
 </body>
 `;
 
-exports[`Component: AddressSearch > lets its errors be caught by an ErrorBoundary 1`] = `
+exports[`lets its errors be caught by an ErrorBoundary 1`] = `
 <body>
   <div>
     <h1
@@ -46,73 +42,262 @@ exports[`Component: AddressSearch > lets its errors be caught by an ErrorBoundar
 </body>
 `;
 
-exports[`Component: AddressSearch > renders default 1`] = `
+exports[`renders default 1`] = `
 <body>
   <div>
-    <div
-      data-testid="react-loqate"
-    >
-      <input
-        class="react-loqate-input"
-        data-testid="react-loqate-input"
-        value=""
-      />
-    </div>
+    <input
+      class="react-loqate-input"
+      data-testid="react-loqate-input"
+      value="a"
+    />
   </div>
   <ul
     class="react-loqate-default-list"
     data-testid="react-loqate-list"
-    hidden=""
     style="position: absolute; top: 0px; left: 0px; width: 0px;"
-  />
+  >
+    <li
+      aria-label="Piccardy Flat, Koolabar, Upper Frog Street Tenby, SA70 7JD"
+      class="react-loqate-list-item"
+      data-testid="react-loqate-list-item-GB|RM|A|21415581"
+      tabindex="0"
+    >
+      Piccardy Flat, Koolabar, Upper Frog Street Tenby, S
+      <strong>
+        A
+      </strong>
+      70 7JD
+    </li>
+    <li
+      aria-label="Piccadilly St. Marys Street Whitchurch, SY13 1RB - 2 Addresses"
+      class="react-loqate-list-item"
+      data-testid="react-loqate-list-item-GB|RM|ENG|WHITCHURCH---STREET-ST._MARYS--PICCADILLY"
+      tabindex="-1"
+    >
+      Piccadilly St. Marys Street Whitchurch, SY13 1RB - 2 
+      <strong>
+        A
+      </strong>
+      ddresses
+    </li>
+    <li
+      aria-label="Piccadilly, Tamworth, B78 174 Addresses"
+      class="react-loqate-list-item"
+      data-testid="react-loqate-list-item-GB|RM|ENG|TAMWORTH-PICCADILLY"
+      tabindex="-1"
+    >
+      Piccadilly, Tamworth, B78 174 
+      <strong>
+        A
+      </strong>
+      ddresses
+    </li>
+    <li
+      aria-label="Picca Close Cardiff, CF5 - 128 Addresses"
+      class="react-loqate-list-item"
+      data-testid="react-loqate-list-item-GB|RM|ENG|CARDIFF---CLOSE-PICCA"
+      tabindex="-1"
+    >
+      Picca Close Cardiff, CF5 - 128 
+      <strong>
+        A
+      </strong>
+      ddresses
+    </li>
+    <li
+      aria-label="Piccadilly Bradford, BD1 - 116 Addresses"
+      class="react-loqate-list-item"
+      data-testid="react-loqate-list-item-GB|RM|ENG|BRADFORD----PICCADILLY"
+      tabindex="-1"
+    >
+      Piccadilly Bradford, BD1 - 116 
+      <strong>
+        A
+      </strong>
+      ddresses
+    </li>
+    <li
+      aria-label="Piccadilly Llanblethian, Cowbridge, CF71 7JL - 19 Addresses"
+      class="react-loqate-list-item"
+      data-testid="react-loqate-list-item-GB|RM|ENG|COWBRIDGE-LLANBLETHIAN---PICCADILLY"
+      tabindex="-1"
+    >
+      Piccadilly Llanblethian, Cowbridge, CF71 7JL - 19 
+      <strong>
+        A
+      </strong>
+      ddresses
+    </li>
+    <li
+      aria-label="Piccadilly Montrose, DD10 8TH - 13 Addresses"
+      class="react-loqate-list-item"
+      data-testid="react-loqate-list-item-GB|RM|ENG|MONTROSE----PICCADILLY"
+      tabindex="-1"
+    >
+      Piccadilly Montrose, DD10 8TH - 13 
+      <strong>
+        A
+      </strong>
+      ddresses
+    </li>
+    <li
+      aria-label="Piccadilly Bentley, Doncaster, DN5 0BQ - 2 Addresses"
+      class="react-loqate-list-item"
+      data-testid="react-loqate-list-item-GB|RM|ENG|DONCASTER-BENTLEY---PICCADILLY"
+      tabindex="-1"
+    >
+      Piccadilly Bentley, Doncaster, DN5 0BQ - 2 
+      <strong>
+        A
+      </strong>
+      ddresses
+    </li>
+    <li
+      aria-label="Piccadilly New Waltham, Grimsby, DN36 4YQ - 4 Addresses"
+      class="react-loqate-list-item"
+      data-testid="react-loqate-list-item-GB|RM|ENG|GRIMSBY-NEW_WALTHAM---PICCADILLY"
+      tabindex="-1"
+    >
+      Piccadilly New Waltham, Grimsby, DN36 4YQ - 4 
+      <strong>
+        A
+      </strong>
+      ddresses
+    </li>
+    <li
+      aria-label="Piccadilly Stroud, GL5 1HB - 2 Addresses"
+      class="react-loqate-list-item"
+      data-testid="react-loqate-list-item-GB|RM|ENG|STROUD----PICCADILLY"
+      tabindex="-1"
+    >
+      Piccadilly Stroud, GL5 1HB - 2 
+      <strong>
+        A
+      </strong>
+      ddresses
+    </li>
+  </ul>
 </body>
 `;
 
-exports[`Component: AddressSearch > renders with classname 1`] = `
+exports[`renders with custom components 1`] = `
 <body>
   <div>
-    <div
-      class="some-classname"
-      data-testid="react-loqate"
-    >
-      <input
-        class="react-loqate-input"
-        data-testid="react-loqate-input"
-        value=""
-      />
-    </div>
-  </div>
-  <ul
-    class="react-loqate-default-list"
-    data-testid="react-loqate-list"
-    hidden=""
-    style="position: absolute; top: 0px; left: 0px; width: 0px;"
-  />
-</body>
-`;
-
-exports[`Component: AddressSearch > renders with custom components 1`] = `
-<body>
-  <div>
-    <div
-      data-testid="react-loqate"
-    >
-      <input
-        class=""
-        data-testid="custom-input"
-        value=""
-      />
-    </div>
+    <input
+      class=""
+      data-testid="custom-input"
+      value="a"
+    />
   </div>
   <ul
     data-testid="custom-list"
-    hidden=""
-    style="position: absolute; top: 0px; left: 0px; width: 0px;"
-  />
+    style="position: absolute; top: 0px; left: 0px;"
+  >
+    <li
+      data-testid="custom-list-item"
+      suggestion="[object Object]"
+      tabindex="0"
+      value="a"
+    >
+      Piccardy Flat, Koolabar, Upper Frog Street
+       
+      Tenby, SA70 7JD
+    </li>
+    <li
+      data-testid="custom-list-item"
+      suggestion="[object Object]"
+      tabindex="-1"
+      value="a"
+    >
+      Piccadilly St. Marys Street
+       
+      Whitchurch, SY13 1RB - 2 Addresses
+    </li>
+    <li
+      data-testid="custom-list-item"
+      suggestion="[object Object]"
+      tabindex="-1"
+      value="a"
+    >
+      Piccadilly, Tamworth, B78
+       
+      174 Addresses
+    </li>
+    <li
+      data-testid="custom-list-item"
+      suggestion="[object Object]"
+      tabindex="-1"
+      value="a"
+    >
+      Picca Close
+       
+      Cardiff, CF5 - 128 Addresses
+    </li>
+    <li
+      data-testid="custom-list-item"
+      suggestion="[object Object]"
+      tabindex="-1"
+      value="a"
+    >
+      Piccadilly
+       
+      Bradford, BD1 - 116 Addresses
+    </li>
+    <li
+      data-testid="custom-list-item"
+      suggestion="[object Object]"
+      tabindex="-1"
+      value="a"
+    >
+      Piccadilly
+       
+      Llanblethian, Cowbridge, CF71 7JL - 19 Addresses
+    </li>
+    <li
+      data-testid="custom-list-item"
+      suggestion="[object Object]"
+      tabindex="-1"
+      value="a"
+    >
+      Piccadilly
+       
+      Montrose, DD10 8TH - 13 Addresses
+    </li>
+    <li
+      data-testid="custom-list-item"
+      suggestion="[object Object]"
+      tabindex="-1"
+      value="a"
+    >
+      Piccadilly
+       
+      Bentley, Doncaster, DN5 0BQ - 2 Addresses
+    </li>
+    <li
+      data-testid="custom-list-item"
+      suggestion="[object Object]"
+      tabindex="-1"
+      value="a"
+    >
+      Piccadilly
+       
+      New Waltham, Grimsby, DN36 4YQ - 4 Addresses
+    </li>
+    <li
+      data-testid="custom-list-item"
+      suggestion="[object Object]"
+      tabindex="-1"
+      value="a"
+    >
+      Piccadilly
+       
+      Stroud, GL5 1HB - 2 Addresses
+    </li>
+  </ul>
 </body>
 `;
 
-exports[`Component: AddressSearch > renders with inline results 1`] = `
+exports[`renders with inline results 1`] = `
 <div
   data-testid="react-loqate"
 >
@@ -250,7 +435,7 @@ exports[`Component: AddressSearch > renders with inline results 1`] = `
 </div>
 `;
 
-exports[`Component: AddressSearch > renders with portal results 1`] = `
+exports[`renders with portal results 1`] = `
 <div
   data-testid="react-loqate"
 >

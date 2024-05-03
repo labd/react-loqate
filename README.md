@@ -27,6 +27,7 @@ import 'react-loqate/dist/index.css';
   apiKey="AA11-AA11-AA11-AA11"
   onSelect={(address) => console.log(address)}
 />;
+// ...
 ```
 
 ### Props
@@ -38,7 +39,6 @@ import 'react-loqate/dist/index.css';
 | onSelect   | (address) => void                                     | yes      | address => console.log(address)                                     | Callback with for Loqate response        |
 | countries  | string[]                                              | no       | ["GB", "NL"]                                                        | Countries to search in                   |
 | limit      | number                                                | no       | 10                                                                  | Number of options to show                |
-| className  | string                                                | no       | "address-search-box"                                                | Classname for the component wrapper      |
 | classes    | `{ input?: string, list?: string, listItem?: string}` | no       | { list: 'list' }                                                    | Classnames for the components            |
 | components | see [Customization](#Customization)                   | no       | { Input: CustomInput, List: CustomList, ListItem: CustomListItem, } | Components to overwrite the default ones |
 | inline     | boolean                                               | no       | true                                                                | Render results inline with the input     |
@@ -46,9 +46,9 @@ import 'react-loqate/dist/index.css';
 
 ### Customization
 
-You can either style the default input, list and listItem with their respective classes or replace them completely by passing in your own components in the components prop.
+You can either style the default input, list and listitem with their respective classes or replace them completely by passing in your own components in the components prop.
 
-**List component must be able to accept a ref!**
+**Input and List components must be able to accept a ref, either through using forwardRef or being a base html element**
 
 **All custom components must pass down their props!**
 
@@ -56,28 +56,23 @@ You can either style the default input, list and listItem with their respective 
 import React from 'react';
 import AddressSearch from 'react-loqate';
 
-const CustomInput = (props): JSX.Element => {
-  return (
-    <input
-      placeholder={'start typing your address or postcode'}
-      autocomplete="chrome-off"
-      {...props}
-    />
-  );
-};
-
 <AddressSearch
-  locale="en-GB"
-  apiKey="AA11-AA11-AA11-AA11"
-  countries={['GB']}
+  // ...
   components={{
-    Input: CustomInput,
+    Input: (props) => <input {...props} />,
+    List: forwardRef((props, ref) => {
+      const { className, ...rest } = props;
+      // ..
+      return (
+        <ul
+          className={clsx('react-loqate-default-list', className)}
+          ref={ref}
+          {...rest}
+        />
+      );
+    }),
   }}
-  className="address-search-box"
-  classes={{ list: 'styled-list' }}
-  onSelect={(address) => console.log(address)}
-  inline
-  debounce={100}
+  classes={{ listItem: 'styled-list-item' }}
 />;
 ```
 
