@@ -48,7 +48,7 @@ import 'react-loqate/dist/index.css';
 
 You can either style the default input, list and listitem with their respective classes or replace them completely by passing in your own components in the components prop.
 
-**Input and List components must be able to accept a ref, either through using forwardRef or being a base html element**
+**Custom Input and List components must forward a ref!**
 
 **All custom components must pass down their props!**
 
@@ -59,7 +59,7 @@ import AddressSearch from 'react-loqate';
 <AddressSearch
   // ...
   components={{
-    Input: (props) => <input {...props} />,
+    Input: fowardRef((props, ref) => <input {...props} ref={ref} />),
     List: forwardRef((props, ref) => {
       const { className, ...rest } = props;
       // ..
