@@ -1,5 +1,11 @@
 # Change log
 
+## 2.0.1
+
+### Patch Changes
+
+- 1bfd4d0: Add access: public to publishConfig
+
 ## 2.0.0
 
 ### Major Changes
