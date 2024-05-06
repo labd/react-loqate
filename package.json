@@ -27,6 +27,9 @@
     "test": "vitest --passWithNoTests",
     "test:ci": "vitest run --passWithNoTests"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "pnpm check"
