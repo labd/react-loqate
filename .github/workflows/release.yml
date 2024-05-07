@@ -33,9 +33,6 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-
   release:
     timeout-minutes: 15
     runs-on: ubuntu-latest
