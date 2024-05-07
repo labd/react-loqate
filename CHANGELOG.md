@@ -1,5 +1,11 @@
 # Change log
 
+## 2.0.2
+
+### Patch Changes
+
+- 5b06f7c: update readme
+
 ## 2.0.1
 
 ### Patch Changes
