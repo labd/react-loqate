@@ -59,20 +59,39 @@ import AddressSearch from 'react-loqate';
 <AddressSearch
   // ...
   components={{
-    Input: fowardRef((props, ref) => <input {...props} ref={ref} />),
-    List: forwardRef((props, ref) => {
-      const { className, ...rest } = props;
-      // ..
-      return (
-        <ul
-          className={clsx('react-loqate-default-list', className)}
-          ref={ref}
-          {...rest}
-        />
-      );
-    }),
+    List: forwardRef(({ className, ...rest }, ref) => (
+      <ul
+        className={clsx('react-loqate-default-list', className)}
+        ref={ref}
+        // ...
+        {...rest}
+      />
+    )),
+    ListItem: ({ suggestion, ...rest }) => (
+      <li
+        onKeyDown={(e) => {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            const next = e.target.nextSibling;
+            if (next) {
+              next.focus();
+            }
+          }
+          if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const previous = e.taget.previousSibling;
+            if (previous) {
+              previous.focus();
+            }
+          }
+        }}
+        {...rest}
+      >
+        `${suggestion.Text} ${suggestion.Description}`
+      </li>
+    ),
   }}
-  classes={{ listItem: 'styled-list-item' }}
+  classes={{ Input: classes.input }}
 />;
 ```
 
