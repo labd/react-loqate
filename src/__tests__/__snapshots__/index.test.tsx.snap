@@ -1,4 +1,4 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Component: AddressSearch > allows for alternative url 1`] = `
 <body>
@@ -19,7 +19,7 @@ exports[`Component: AddressSearch > allows for alternative url 1`] = `
     style="position: absolute; top: 0px; left: 0px; width: 0px;"
   >
     <li
-      aria-label="a"
+      aria-label="foo bar"
       class="react-loqate-list-item"
       data-testid="react-loqate-list-item-baz"
       tabindex="0"
@@ -31,6 +31,18 @@ exports[`Component: AddressSearch > allows for alternative url 1`] = `
       r
     </li>
   </ul>
+</body>
+`;
+
+exports[`Component: AddressSearch > lets its errors be caught by an ErrorBoundary 1`] = `
+<body>
+  <div>
+    <h1
+      data-testid="error-notification"
+    >
+      Something went wrong.
+    </h1>
+  </div>
 </body>
 `;
 
@@ -115,7 +127,7 @@ exports[`Component: AddressSearch > renders with inline results 1`] = `
     style="position: absolute; top: 0px; left: 0px; width: 0px;"
   >
     <li
-      aria-label="A"
+      aria-label="Piccardy Flat, Koolabar, Upper Frog Street Tenby, SA70 7JD"
       class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|A|21415581"
       tabindex="0"
@@ -127,10 +139,10 @@ exports[`Component: AddressSearch > renders with inline results 1`] = `
       70 7JD
     </li>
     <li
-      aria-label="A"
+      aria-label="Piccadilly St. Marys Street Whitchurch, SY13 1RB - 2 Addresses"
       class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|WHITCHURCH---STREET-ST._MARYS--PICCADILLY"
-      tabindex="0"
+      tabindex="-1"
     >
       Piccadilly St. Marys Street Whitchurch, SY13 1RB - 2 
       <strong>
@@ -139,10 +151,10 @@ exports[`Component: AddressSearch > renders with inline results 1`] = `
       ddresses
     </li>
     <li
-      aria-label="A"
+      aria-label="Piccadilly, Tamworth, B78 174 Addresses"
       class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|TAMWORTH-PICCADILLY"
-      tabindex="0"
+      tabindex="-1"
     >
       Piccadilly, Tamworth, B78 174 
       <strong>
@@ -151,10 +163,10 @@ exports[`Component: AddressSearch > renders with inline results 1`] = `
       ddresses
     </li>
     <li
-      aria-label="A"
+      aria-label="Picca Close Cardiff, CF5 - 128 Addresses"
       class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|CARDIFF---CLOSE-PICCA"
-      tabindex="0"
+      tabindex="-1"
     >
       Picca Close Cardiff, CF5 - 128 
       <strong>
@@ -163,10 +175,10 @@ exports[`Component: AddressSearch > renders with inline results 1`] = `
       ddresses
     </li>
     <li
-      aria-label="A"
+      aria-label="Piccadilly Bradford, BD1 - 116 Addresses"
       class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|BRADFORD----PICCADILLY"
-      tabindex="0"
+      tabindex="-1"
     >
       Piccadilly Bradford, BD1 - 116 
       <strong>
@@ -175,10 +187,10 @@ exports[`Component: AddressSearch > renders with inline results 1`] = `
       ddresses
     </li>
     <li
-      aria-label="A"
+      aria-label="Piccadilly Llanblethian, Cowbridge, CF71 7JL - 19 Addresses"
       class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|COWBRIDGE-LLANBLETHIAN---PICCADILLY"
-      tabindex="0"
+      tabindex="-1"
     >
       Piccadilly Llanblethian, Cowbridge, CF71 7JL - 19 
       <strong>
@@ -187,10 +199,10 @@ exports[`Component: AddressSearch > renders with inline results 1`] = `
       ddresses
     </li>
     <li
-      aria-label="A"
+      aria-label="Piccadilly Montrose, DD10 8TH - 13 Addresses"
       class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|MONTROSE----PICCADILLY"
-      tabindex="0"
+      tabindex="-1"
     >
       Piccadilly Montrose, DD10 8TH - 13 
       <strong>
@@ -199,10 +211,10 @@ exports[`Component: AddressSearch > renders with inline results 1`] = `
       ddresses
     </li>
     <li
-      aria-label="A"
+      aria-label="Piccadilly Bentley, Doncaster, DN5 0BQ - 2 Addresses"
       class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|DONCASTER-BENTLEY---PICCADILLY"
-      tabindex="0"
+      tabindex="-1"
     >
       Piccadilly Bentley, Doncaster, DN5 0BQ - 2 
       <strong>
@@ -211,10 +223,10 @@ exports[`Component: AddressSearch > renders with inline results 1`] = `
       ddresses
     </li>
     <li
-      aria-label="A"
+      aria-label="Piccadilly New Waltham, Grimsby, DN36 4YQ - 4 Addresses"
       class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|GRIMSBY-NEW_WALTHAM---PICCADILLY"
-      tabindex="0"
+      tabindex="-1"
     >
       Piccadilly New Waltham, Grimsby, DN36 4YQ - 4 
       <strong>
@@ -223,10 +235,10 @@ exports[`Component: AddressSearch > renders with inline results 1`] = `
       ddresses
     </li>
     <li
-      aria-label="A"
+      aria-label="Piccadilly Stroud, GL5 1HB - 2 Addresses"
       class="react-loqate-list-item"
       data-testid="react-loqate-list-item-GB|RM|ENG|STROUD----PICCADILLY"
-      tabindex="0"
+      tabindex="-1"
     >
       Piccadilly Stroud, GL5 1HB - 2 
       <strong>

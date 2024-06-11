@@ -1,9 +1,10 @@
-import { Item } from '..';
+import { Item, LoqateErrorItem } from '..';
 import {
   LOQATE_BASE_URL,
   LOQATE_FIND_URL,
   LOQATE_RETRIEVE_URL,
 } from '../constants/loqate';
+import { LoqateError, ReactLoqateError } from '../error';
 
 interface FindQuery {
   text: string;
@@ -13,20 +14,40 @@ interface FindQuery {
   containerId?: string;
 }
 
+type LoqateResponse = { Items?: Item[] | LoqateErrorItem[] };
+type LoqateNoErrorResponse = { Items?: Item[] };
 class Loqate {
-  constructor(public key: string, public baseUrl: string = LOQATE_BASE_URL) {}
+  constructor(
+    public key: string,
+    public baseUrl: string = LOQATE_BASE_URL
+  ) {}
 
   public static create(key: string, baseUrl: string = LOQATE_BASE_URL): Loqate {
     return new Loqate(key, baseUrl);
   }
 
   public async retrieve(id: string): Promise<{ Items?: Item[] }> {
-    const params = new URLSearchParams({ Id: id, Key: this.key, field1format: '{Latitude}', field2format: '{Longitude}' });
+    const params = new URLSearchParams({
+      Id: id,
+      Key: this.key,
+      field1format: '{Latitude}',
+      field2format: '{Longitude}',
+    });
     const url = `${this.baseUrl}/${LOQATE_RETRIEVE_URL}?${params.toString()}`;
-    return fetch(url).then<{ Items?: Item[] }>((r) => r.json());
+    const res = await fetch(url).then<LoqateResponse>((r) => r.json());
+    const noLoqateErrosRes = this.handleErrors(res);
+
+    if (noLoqateErrosRes.Items && !noLoqateErrosRes.Items?.length) {
+      throw new ReactLoqateError({
+        code: 'NO_ITEMS_RETRIEVED',
+        message: `Loqate retrieve API did not return any address items for the provided ID ${id}`,
+      });
+    }
+
+    return noLoqateErrosRes;
   }
 
-  public async find(query: FindQuery): Promise<{ Items?: Item[] }> {
+  public async find(query: FindQuery): Promise<LoqateNoErrorResponse> {
     const { text, countries = [], containerId, language, limit } = query;
 
     const params = new URLSearchParams({
@@ -42,15 +63,19 @@ class Loqate {
       params.set('limit', limit.toString());
     }
     const url = `${this.baseUrl}/${LOQATE_FIND_URL}?${params.toString()}`;
-    const response = await fetch(url).then<{ Items?: Item[] }>((r) => r.json());
+    const response = await fetch(url).then<LoqateResponse>((r) => r.json());
 
-    const error = response?.Items?.find((item: any) => item.Error);
-    if (error) {
-      throw new Error(`Loqate error: ${JSON.stringify(error)}`);
+    return this.handleErrors(response);
+  }
+
+  private handleErrors = (res: LoqateResponse): LoqateNoErrorResponse => {
+    const firstItem: Item | LoqateErrorItem | undefined = res?.Items?.[0];
+    if (firstItem && Object.hasOwn(firstItem, 'Error')) {
+      throw new LoqateError(firstItem as LoqateErrorItem);
     }
 
-    return response;
-  }
+    return res as LoqateNoErrorResponse;
+  };
 }
 
 export default Loqate;

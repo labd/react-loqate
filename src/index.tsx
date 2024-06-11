@@ -110,6 +110,13 @@ export interface Item {
   Highlight: string;
 }
 
+export interface LoqateErrorItem {
+  Error: string;
+  Description: string;
+  Cause: string;
+  Resolution: string;
+}
+
 function AddressSearch(props: Props): JSX.Element {
   const {
     locale,
@@ -117,7 +124,6 @@ function AddressSearch(props: Props): JSX.Element {
     onSelect,
     limit,
     apiKey,
-    className,
     classes,
     components,
     inline,
@@ -128,28 +134,49 @@ function AddressSearch(props: Props): JSX.Element {
 
   const [suggestions, setSuggestions] = useState<Item[]>([]);
   const [value, setValue] = useState('');
+  const [, setError] = useState(null);
 
-  const anchorRef = useRef<HTMLDivElement>(null);
+  const anchorRef = useRef<HTMLInputElement>(null);
   const rect = anchorRef.current?.getBoundingClientRect();
 
   async function find(text: string, containerId?: string): Promise<Item[]> {
-    const { Items } = await loqate.find({
-      countries,
-      limit,
-      text,
-      containerId,
-      language: loqateLanguage(locale),
-    });
+    let Items: Item[] = [];
+    try {
+      const res = await loqate.find({
+        countries,
+        limit,
+        text,
+        containerId,
+        language: loqateLanguage(locale),
+      });
 
-    return Items ?? [];
+      if (res.Items) {
+        Items = res.Items;
+      }
+    } catch (e) {
+      // error needs to be thrown in the render in order to be caught by the ErrorBoundary
+      setError(() => {
+        throw e;
+      });
+    }
+
+    return Items;
   }
 
   async function selectSuggestion({ Type, Id }: Item): Promise<void> {
     if (Type === 'Address') {
-      const { Items = [] } = await loqate.retrieve(Id);
-
-      if (Items.length) {
+      let Items: Item[] = [];
+      try {
+        const res = await loqate.retrieve(Id);
+        if (res.Items) {
+          Items = res.Items;
+        }
+      } catch (e) {
         setSuggestions([]);
+        // error needs to be thrown in the render in order to be caught by the ErrorBoundary
+        setError(() => {
+          throw e;
+        });
       }
 
       onSelect(Items[0] as unknown as Address);
@@ -186,12 +213,12 @@ function AddressSearch(props: Props): JSX.Element {
   const ListItem = components?.ListItem ?? DefaultListItem;
 
   return (
-    <div ref={anchorRef} className={className} data-testid="react-loqate">
+    <>
       <Input
+        ref={anchorRef}
         className={clsx(classes?.input)}
         onChange={handleChange}
         value={value}
-        data-testid="react-loqate-input"
         onKeyDown={(e) => {
           if (e.key === 'Escape') {
             setSuggestions([]);
@@ -210,7 +237,6 @@ function AddressSearch(props: Props): JSX.Element {
             }}
             hidden={!suggestions.length}
             className={classes?.list}
-            data-testid="react-loqate-list"
           >
             {suggestions.map((suggestion, i) => (
               <ListItem
@@ -225,9 +251,9 @@ function AddressSearch(props: Props): JSX.Element {
                   }
                 }}
                 className={classes?.listItem}
-                data-testid={`react-loqate-list-item-${suggestion.Id}`}
                 value={value}
                 suggestion={suggestion}
+                tabIndex={i === 0 ? 0 : -1}
               >
                 {suggestion.Text} {suggestion.Description}
               </ListItem>
@@ -235,7 +261,7 @@ function AddressSearch(props: Props): JSX.Element {
           </List>
         </ClickAwayListener>
       </Portal>
-    </div>
+    </>
   );
 }
 

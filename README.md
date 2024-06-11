@@ -1,4 +1,4 @@
-# React-Locate
+# React-Loqate
 
 This is a React implementation of the loqate APIs. It features an input, typing in which will result in a list of address options. Clicking an option will trigger your callback with that option.
 
@@ -19,7 +19,7 @@ npm install react-loqate
 ```javascript
 import AddressSearch from 'react-loqate';
 // to use the default styles for the default components
-import 'react-loqate/dist/react-loqate.cjs.development.css';
+import 'react-loqate/dist/index.css';
 
 // ...
 <AddressSearch
@@ -27,6 +27,7 @@ import 'react-loqate/dist/react-loqate.cjs.development.css';
   apiKey="AA11-AA11-AA11-AA11"
   onSelect={(address) => console.log(address)}
 />;
+// ...
 ```
 
 ### Props
@@ -38,7 +39,6 @@ import 'react-loqate/dist/react-loqate.cjs.development.css';
 | onSelect   | (address) => void                                     | yes      | address => console.log(address)                                     | Callback with for Loqate response        |
 | countries  | string[]                                              | no       | ["GB", "NL"]                                                        | Countries to search in                   |
 | limit      | number                                                | no       | 10                                                                  | Number of options to show                |
-| className  | string                                                | no       | "address-search-box"                                                | Classname for the component wrapper      |
 | classes    | `{ input?: string, list?: string, listItem?: string}` | no       | { list: 'list' }                                                    | Classnames for the components            |
 | components | see [Customization](#Customization)                   | no       | { Input: CustomInput, List: CustomList, ListItem: CustomListItem, } | Components to overwrite the default ones |
 | inline     | boolean                                               | no       | true                                                                | Render results inline with the input     |
@@ -46,9 +46,9 @@ import 'react-loqate/dist/react-loqate.cjs.development.css';
 
 ### Customization
 
-You can either style the default input, list and listItem with their respective classes or replace them completely by passing in your own components in the components prop.
+You can either style the default input, list and listitem with their respective classes or replace them completely by passing in your own components in the components prop.
 
-**List component must be able to accept a ref!**
+**Custom Input and List components must forward a ref!**
 
 **All custom components must pass down their props!**
 
@@ -56,27 +56,60 @@ You can either style the default input, list and listItem with their respective 
 import React from 'react';
 import AddressSearch from 'react-loqate';
 
-const CustomInput = (props): JSX.Element => {
-  return (
-    <input
-      placeholder={'start typing your address or postcode'}
-      autocomplete="chrome-off"
-      {...props}
-    />
-  );
-};
-
 <AddressSearch
-  locale="en-GB"
-  apiKey="AA11-AA11-AA11-AA11"
-  countries={['GB']}
+  // ...
   components={{
-    Input: CustomInput,
+    List: forwardRef(({ className, ...rest }, ref) => (
+      <ul
+        className={clsx('react-loqate-default-list', className)}
+        ref={ref}
+        // ...
+        {...rest}
+      />
+    )),
+    ListItem: ({ suggestion, ...rest }) => (
+      <li
+        onKeyDown={(e) => {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            const next = e.target.nextSibling;
+            if (next) {
+              next.focus();
+            }
+          }
+          if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const previous = e.taget.previousSibling;
+            if (previous) {
+              previous.focus();
+            }
+          }
+        }}
+        {...rest}
+      >
+        `${suggestion.Text} ${suggestion.Description}`
+      </li>
+    ),
   }}
-  className="address-search-box"
-  classes={{ list: 'styled-list' }}
-  onSelect={(address) => console.log(address)}
-  inline
-  debounce={100}
+  classes={{ Input: classes.input }}
 />;
 ```
+
+### Errors
+
+Two types of errors can be thrown, LoqateError and ReactLoqateError.
+Loqate Errors are errors from the Loqate API. Their structure, causes and resolutions can be [found in the loqate docs](https://www.loqate.com/developers/api/generic-errors/).
+
+Currently only one ReactLoqateError can be thrown. This error occurs when the Retrieve API returns an empty Items array after querying it with an existing ID.
+
+It is on you as the implementing party to catch and handle these errors.
+
+### Contributing
+
+This codebases use [@changesets](https://github.com/changesets/changesets) for release and version management
+
+- Create a feature branch with new features / fixes
+- When your code changes are complete, add a changeset file to your feature branch using `pnpm changeset`
+- Create a PR to request your changes to be merged to main
+- After your PR is merged, GitHub actions will create a release PR or add your changeset to an existing release PR
+- When the release is ready merge the release branch. A new version will automatically be released.
