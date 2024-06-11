@@ -1,5 +1,15 @@
 # Change log
 
+## 3.0.0
+
+### Major Changes
+
+- 5fa9eec: Breaking: implement LoqateError and ReactLoqateError
+
+### Minor Changes
+
+- 229fd80: chore: move to loqate retrieve api v1.2
+
 ## 2.0.2
 
 ### Patch Changes
