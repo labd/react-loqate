@@ -110,7 +110,7 @@ export interface Item {
   Highlight: string;
 }
 
-export interface ErrorItem {
+export interface LoqateErrorItem {
   Error: string;
   Description: string;
   Cause: string;
@@ -172,14 +172,11 @@ function AddressSearch(props: Props): JSX.Element {
           Items = res.Items;
         }
       } catch (e) {
+        setSuggestions([]);
         // error needs to be thrown in the render in order to be caught by the ErrorBoundary
         setError(() => {
           throw e;
         });
-      }
-
-      if (Items.length) {
-        setSuggestions([]);
       }
 
       onSelect(Items[0] as unknown as Address);

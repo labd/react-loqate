@@ -41,7 +41,7 @@ describe('Loqate', () => {
       expect({ Items }).toEqual(suggestions);
     });
 
-    it('should throw loqate errors', async () => {
+    it('should throw errors', async () => {
       server.use(errorHandler);
 
       const loqate = Loqate.create('some-key');
@@ -54,10 +54,36 @@ describe('Loqate', () => {
           limit: 10,
           containerId: 'some-container-id',
         });
-      }).rejects.toThrowError(
-        new Error(
-          'Loqate error: {"Error":"2","Description":"Unknown key","Cause":"The key you are using to access the service was not found.","Resolution":"Please check that the key is correct. It should be in the form AA11-AA11-AA11-AA11."}'
-        )
+      }).rejects.toThrowError(new Error('Unknown key'));
+    });
+
+    it('should throw loqate errors', async () => {
+      server.use(errorHandler);
+
+      const loqate = Loqate.create('some-key');
+
+      let error;
+      try {
+        await loqate.find({
+          text: 'some-text',
+          language: 'some-language',
+          countries: ['GB', 'US'],
+          limit: 10,
+          containerId: 'some-container-id',
+        });
+      } catch (e) {
+        error = e;
+      }
+
+      expect(error).toEqual(new Error('Unknown key'));
+      expect(JSON.stringify(error)).toEqual(
+        JSON.stringify({
+          Cause: 'The key you are using to access the service was not found.',
+          Description: 'Unknown key',
+          Error: '2',
+          Resolution:
+            'Please check that the key is correct. It should be in the form AA11-AA11-AA11-AA11.',
+        })
       );
     });
   });

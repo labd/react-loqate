@@ -95,6 +95,15 @@ import AddressSearch from 'react-loqate';
 />;
 ```
 
+### Errors
+
+Two types of errors can be thrown, LoqateError and ReactLoqateError.
+Loqate Errors are errors from the Loqate API. Their structure, causes and resolutions can be [found in the loqate docs](https://www.loqate.com/developers/api/generic-errors/).
+
+Currently only one ReactLoqateError can be thrown. This error occurs when the Retrieve API returns an empty Items array after querying it with an existing ID.
+
+It is on you as the implementing party to catch and handle these errors.
+
 ### Contributing
 
 This codebases use [@changesets](https://github.com/changesets/changesets) for release and version management

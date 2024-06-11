@@ -1,9 +1,10 @@
-import { ErrorItem, Item } from '..';
+import { Item, LoqateErrorItem } from '..';
 import {
   LOQATE_BASE_URL,
   LOQATE_FIND_URL,
   LOQATE_RETRIEVE_URL,
 } from '../constants/loqate';
+import { LoqateError, ReactLoqateError } from '../error';
 
 interface FindQuery {
   text: string;
@@ -13,7 +14,7 @@ interface FindQuery {
   containerId?: string;
 }
 
-type LoqateResponse = { Items?: Item[] | ErrorItem[] };
+type LoqateResponse = { Items?: Item[] | LoqateErrorItem[] };
 type LoqateNoErrorResponse = { Items?: Item[] };
 class Loqate {
   constructor(
@@ -29,7 +30,16 @@ class Loqate {
     const params = new URLSearchParams({ Id: id, Key: this.key });
     const url = `${this.baseUrl}/${LOQATE_RETRIEVE_URL}?${params.toString()}`;
     const res = await fetch(url).then<LoqateResponse>((r) => r.json());
-    return this.handleErrors(res);
+    const noLoqateErrosRes = this.handleErrors(res);
+
+    if (noLoqateErrosRes.Items && !noLoqateErrosRes.Items?.length) {
+      throw new ReactLoqateError({
+        code: 'NO_ITEMS_RETRIEVED',
+        message: `Loqate retrieve API did not return any address items for the provided ID ${id}`,
+      });
+    }
+
+    return noLoqateErrosRes;
   }
 
   public async find(query: FindQuery): Promise<LoqateNoErrorResponse> {
@@ -54,9 +64,9 @@ class Loqate {
   }
 
   private handleErrors = (res: LoqateResponse): LoqateNoErrorResponse => {
-    const firstItem: Item | ErrorItem | undefined = res?.Items?.[0];
+    const firstItem: Item | LoqateErrorItem | undefined = res?.Items?.[0];
     if (firstItem && Object.hasOwn(firstItem, 'Error')) {
-      throw new Error(`Loqate error: ${JSON.stringify(firstItem)}`);
+      throw new LoqateError(firstItem as LoqateErrorItem);
     }
 
     return res as LoqateNoErrorResponse;
