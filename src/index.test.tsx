@@ -29,7 +29,7 @@ it('renders default', async () => {
   expect(baseElement).toMatchSnapshot();
 });
 
-it('calls the onSelect function', async () => {
+it('calls the onSelect function and closes the suggestion list after selecting an item', async () => {
   const onSelectFn = vi.fn();
 
   render(
@@ -44,14 +44,19 @@ it('calls the onSelect function', async () => {
   const input = screen.getByRole('textbox');
   fireEvent.change(input, { target: { value: 'a' } });
 
-  const listItems = await screen.findAllByRole('listitem');
-  const firstListItem = listItems[0];
-  fireEvent.click(firstListItem);
+  const list = await screen.findByRole('list');
+  expect(list.childNodes).toHaveLength(10);
+  expect(list.hidden).toBe(false);
+
+  fireEvent.click(list.firstChild as Element);
 
   await waitFor(() => {
     expect(onSelectFn.mock.calls.length).toBe(1);
     expect(onSelectFn).toHaveBeenCalledWith(selection.Items[0]);
   });
+
+  expect(list.childNodes).toHaveLength(0);
+  expect(list.hidden).toBe(true);
 });
 
 it('allows for alternative url', async () => {
