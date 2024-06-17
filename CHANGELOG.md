@@ -1,5 +1,11 @@
 # Change log
 
+## 3.0.1
+
+### Patch Changes
+
+- 13efaee: fix: empty the suggestions list when a selection is made
+
 ## 3.0.0
 
 ### Major Changes
