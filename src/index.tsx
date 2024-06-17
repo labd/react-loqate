@@ -180,6 +180,7 @@ function AddressSearch(props: Props): JSX.Element {
       }
 
       onSelect(Items[0] as unknown as Address);
+      setSuggestions([]);
       return;
     }
 
