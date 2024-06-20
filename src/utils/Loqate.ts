@@ -12,6 +12,8 @@ interface FindQuery {
   countries?: string[];
   limit?: number;
   containerId?: string;
+  origin?: string;
+  bias?: boolean;
 }
 
 type LoqateResponse = { Items?: Item[] | LoqateErrorItem[] };
@@ -43,14 +45,25 @@ class Loqate {
   }
 
   public async find(query: FindQuery): Promise<LoqateNoErrorResponse> {
-    const { text, countries = [], containerId, language, limit } = query;
+    const {
+      text,
+      countries = [],
+      containerId,
+      language,
+      limit,
+      origin,
+      bias,
+    } = query;
 
     const params = new URLSearchParams({
       Text: text,
       Countries: countries.join(','),
       language,
       Key: this.key,
+      Origin: origin ? origin : '',
+      Bias: bias ? 'true' : 'false',
     });
+
     if (containerId) {
       params.set('Container', containerId);
     }

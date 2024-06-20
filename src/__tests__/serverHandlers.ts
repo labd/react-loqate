@@ -65,3 +65,24 @@ export const errorHandler = http.get(
     });
   }
 );
+
+export const biasHandler = http.get(
+  `${LOQATE_BASE_URL}/${LOQATE_FIND_URL}`,
+  ({ request }) => {
+    const url = new URL(request.url);
+    const bias = url.searchParams.get('Bias');
+    const origin = url.searchParams.get('Origin');
+    if (bias === 'true' && origin !== '') {
+      return HttpResponse.json({
+        Items: {
+          Id: 'GB|RM|ENG|TAMWORTH-PICCADILLY',
+          Type: 'Locality',
+          Text: 'Piccadilly, Tamworth, B78',
+          Highlight: '0-10',
+          Description: '174 Addresses',
+        },
+      });
+    }
+    throw new Error(`no bias`);
+  }
+);
