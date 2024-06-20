@@ -8,6 +8,7 @@ import { selection } from './__tests__/__fixtures__/selection';
 import { server } from './__tests__/server';
 import { errorHandler } from './__tests__/serverHandlers';
 import AddressSearch from './index';
+import Loqate from './utils/Loqate';
 
 global.fetch = fetch;
 
@@ -345,4 +346,34 @@ it('lets its errors be caught by an ErrorBoundary', async () => {
   });
 
   expect(baseElement).toMatchSnapshot();
+});
+
+it('accepts origin and bias options', async () => {
+  const findSpy = vi.spyOn(Loqate.prototype, 'find');
+
+  render(
+    <AddressSearch
+      locale="en-GB"
+      apiKey="some-key"
+      onSelect={vi.fn()}
+      limit={5}
+      inline
+      bias={true}
+      origin="GB"
+    />
+  );
+
+  const input = screen.getByRole('textbox');
+  input.focus();
+  fireEvent.change(input, { target: { value: 'a' } });
+
+  expect(findSpy).toHaveBeenCalledWith({
+    bias: true,
+    containerId: undefined,
+    countries: undefined,
+    language: 'en',
+    limit: 5,
+    origin: 'GB',
+    text: 'a',
+  });
 });

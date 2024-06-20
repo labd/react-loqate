@@ -29,6 +29,8 @@ export interface Props {
   inline?: boolean;
   debounce?: number;
   apiUrl?: string;
+  bias?: boolean;
+  origin?: string;
 }
 
 interface Components {
@@ -129,6 +131,8 @@ function AddressSearch(props: Props): JSX.Element {
     inline,
     debounce,
     apiUrl,
+    bias,
+    origin,
   } = props;
   const loqate = useMemo(() => Loqate.create(apiKey, apiUrl), [apiKey]);
 
@@ -148,6 +152,8 @@ function AddressSearch(props: Props): JSX.Element {
         text,
         containerId,
         language: loqateLanguage(locale),
+        origin,
+        bias,
       });
 
       if (res.Items) {
