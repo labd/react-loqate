@@ -14,6 +14,7 @@ const DefaultInput = forwardRef(
         className={clsx('react-loqate-input', className)}
         ref={ref}
         {...rest}
+        autoComplete="ksahdkjsadbsakjd"
       />
     );
   }
