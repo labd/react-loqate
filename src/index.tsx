@@ -1,4 +1,3 @@
-import { ClickAwayListener, Portal } from '@mui/base';
 import clsx from 'clsx';
 import React, {
   ChangeEvent,
@@ -10,7 +9,9 @@ import React, {
 import DefaultInput from './components/DefaultInput';
 import DefaultList from './components/DefaultList';
 import DefaultListItem from './components/DefaultListItem';
+import ClickAwayListener from './utils/ClickAwayListener';
 import Loqate from './utils/Loqate';
+import Portal from './utils/Portal';
 import useDebounceEffect from './utils/useDebounceEffect';
 
 export interface Props {
