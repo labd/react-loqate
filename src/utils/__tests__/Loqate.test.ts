@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { selection } from '../../__tests__/__fixtures__/selection';
 import { suggestions } from '../../__tests__/__fixtures__/suggestions';
 import { server } from '../../__tests__/server';
-import { errorHandler } from '../../__tests__/serverHandlers';
+import { biasHandler, errorHandler } from '../../__tests__/serverHandlers';
 import Loqate from '../Loqate';
 
 global.fetch = fetch;
@@ -39,6 +39,31 @@ describe('Loqate', () => {
       });
 
       expect({ Items }).toEqual(suggestions);
+    });
+
+    it('accepts bias and origin', async () => {
+      server.use(biasHandler);
+
+      const loqate = Loqate.create('some-key');
+      const { Items } = await loqate.find({
+        text: 'some-text',
+        language: 'some-language',
+        countries: ['GB', 'US'],
+        limit: 10,
+        containerId: 'some-container-id',
+        bias: true,
+        origin: '93.184.216.34',
+      });
+
+      expect({ Items }).toEqual({
+        Items: {
+          Id: 'GB|RM|ENG|TAMWORTH-PICCADILLY',
+          Type: 'Locality',
+          Text: 'Piccadilly, Tamworth, B78',
+          Highlight: '0-10',
+          Description: '174 Addresses',
+        },
+      });
     });
 
     it('should throw errors', async () => {
