@@ -3,11 +3,11 @@ import userEvent from '@testing-library/user-event';
 import { fetch } from 'cross-fetch';
 import React from 'react';
 import { afterAll, afterEach, beforeAll, expect, it, vi } from 'vitest';
-import ErrorBoundary from './__tests__/ErrorBoundary';
-import { selection } from './__tests__/__fixtures__/selection';
-import { server } from './__tests__/server';
-import { errorHandler } from './__tests__/serverHandlers';
+import ErrorBoundary from './ErrorBoundary';
 import AddressSearch from './index';
+import { server } from './server';
+import { errorHandler } from './serverHandlers';
+import { selection } from './testing/fixtures/selection';
 import Loqate from './utils/Loqate';
 
 global.fetch = fetch;

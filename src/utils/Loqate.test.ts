@@ -1,10 +1,10 @@
 import { fetch } from 'cross-fetch';
 import { describe, expect, it } from 'vitest';
-import { selection } from '../../__tests__/__fixtures__/selection';
-import { suggestions } from '../../__tests__/__fixtures__/suggestions';
-import { server } from '../../__tests__/server';
-import { biasHandler, errorHandler } from '../../__tests__/serverHandlers';
-import Loqate from '../Loqate';
+import { server } from '../server';
+import { biasHandler, errorHandler } from '../serverHandlers';
+import { selection } from '../testing/fixtures/selection';
+import { suggestions } from '../testing/fixtures/suggestions';
+import Loqate from './Loqate';
 
 global.fetch = fetch;
 
