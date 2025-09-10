@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { afterAll, afterEach, beforeAll } from 'vitest';
-import { server } from './src/__tests__/server';
+import { server } from './src/server';
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
 afterEach(() => server.resetHandlers());

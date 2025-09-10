@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { expect, it, vi } from 'vitest';
-import ClickAwayListener from '../ClickAwayListener';
+import ClickAwayListener from './ClickAwayListener';
 
 it('calls onClickAway when clicking outside the component', () => {
   const onClickAway = vi.fn();

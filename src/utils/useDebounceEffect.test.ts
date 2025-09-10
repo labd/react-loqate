@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { expect, it, vi } from 'vitest';
-import useDebounceEffect from '../useDebounceEffect';
+import useDebounceEffect from './useDebounceEffect';
 
 it('should debounce the effect', async () => {
   const effectFn = vi.fn();

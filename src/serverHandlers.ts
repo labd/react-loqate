@@ -4,9 +4,9 @@ import {
   LOQATE_BASE_URL,
   LOQATE_FIND_URL,
   LOQATE_RETRIEVE_URL,
-} from '../constants/loqate';
-import { selection } from './__fixtures__/selection';
-import { suggestions } from './__fixtures__/suggestions';
+} from './constants/loqate';
+import { selection } from './testing/fixtures/selection';
+import { suggestions } from './testing/fixtures/suggestions';
 
 export const handlers = [
   http.get(`${LOQATE_BASE_URL}/${LOQATE_FIND_URL}`, async ({ request }) => {

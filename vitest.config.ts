@@ -13,6 +13,15 @@ export default defineConfig({
       include: ['src/**/*.ts', 'src/**/*.tsx'],
     },
     passWithNoTests: true,
+    resolveSnapshotPath: (testPath: string, snapExtension: string) => {
+      return path.join(
+        __dirname,
+        'src',
+        'testing',
+        'snapshots',
+        path.basename(testPath) + snapExtension
+      );
+    },
   },
   resolve: {
     alias: {

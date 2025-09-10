@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import React, { type ReactPortal, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { beforeEach, expect, it, vi } from 'vitest';
-import Portal from '../Portal';
+import Portal from './Portal';
 
 vi.mock('react-dom', async () => {
   const actual = await vi.importActual('react-dom');
