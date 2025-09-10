@@ -378,6 +378,64 @@ it('accepts origin and bias options', async () => {
   });
 });
 
+it('preserves focus when using custom Input with external state management', async () => {
+  function TestComponent() {
+    const [, setExternalState] = React.useState('');
+
+    return (
+      <AddressSearch
+        locale="en-GB"
+        apiKey="test-key"
+        onSelect={() => {}}
+        components={{
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          Input: React.forwardRef<HTMLInputElement, any>(
+            ({ value, onChange, ...rest }, ref) => {
+              React.useEffect(() => {
+                setExternalState(value || '');
+              }, [value]);
+
+              return (
+                <input
+                  ref={ref}
+                  value={value || ''}
+                  onChange={(event) => {
+                    onChange?.(event);
+                    setExternalState(event.target.value);
+                  }}
+                  {...rest}
+                  data-testid="external-state-input"
+                />
+              );
+            }
+          ),
+        }}
+      />
+    );
+  }
+
+  render(<TestComponent />);
+
+  const input = screen.getByTestId('external-state-input') as HTMLInputElement;
+  input.focus();
+  expect(document.activeElement).toBe(input);
+
+  fireEvent.change(input, { target: { value: 'a' } });
+
+  await screen.findByRole('list');
+
+  await waitFor(
+    () => {
+      const currentInput = screen.getByTestId('external-state-input');
+      expect(document.activeElement).toBe(currentInput);
+    },
+    { timeout: 1000 }
+  );
+
+  const suggestions = screen.getAllByRole('listitem');
+  expect(suggestions.length).toBeGreaterThan(0);
+});
+
 it('disables browser autocomplete by default', () => {
   render(<AddressSearch locale="en-GB" apiKey="some-key" onSelect={vi.fn()} />);
 

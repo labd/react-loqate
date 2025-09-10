@@ -3,7 +3,6 @@ import React, {
   type ChangeEvent,
   type ComponentType,
   useMemo,
-  useRef,
   useState,
 } from 'react';
 import DefaultInput from './components/DefaultInput';
@@ -13,6 +12,7 @@ import ClickAwayListener from './utils/ClickAwayListener';
 import Loqate from './utils/Loqate';
 import Portal from './utils/Portal';
 import useDebounceEffect from './utils/useDebounceEffect';
+import usePreserveFocus from './utils/usePreserveFocus';
 
 export interface Props {
   locale: string;
@@ -143,7 +143,9 @@ function AddressSearch(props: Props): JSX.Element {
   const [value, setValue] = useState('');
   const [, setError] = useState(null);
 
-  const anchorRef = useRef<HTMLInputElement>(null);
+  const { elementRef: anchorRef, preserveFocus } =
+    usePreserveFocus<HTMLInputElement>();
+
   const rect = anchorRef.current?.getBoundingClientRect();
 
   async function find(text: string, containerId?: string): Promise<Item[]> {
@@ -202,6 +204,8 @@ function AddressSearch(props: Props): JSX.Element {
   }: ChangeEvent<HTMLInputElement>): Promise<void> {
     const { value: search } = target;
 
+    // Custom Input components with external state management can cause DOM reconciliation issues that lose focus
+    preserveFocus();
     setValue(search);
   }
 

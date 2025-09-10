@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
-import AddressSearch, { Address, Props } from '..';
+import AddressSearch, { type Address, type Props } from '..';
 
 const meta: Meta = {
   title: 'Loqate Address Search',
