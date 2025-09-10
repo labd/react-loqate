@@ -1,5 +1,25 @@
 # Change log
 
+## 3.1.0
+
+### Minor Changes
+
+- d9b43f7: Add disableBrowserAutocomplete prop to prevent browser autocomplete interference with address suggestions. This prop defaults to true, disabling browser autocomplete by setting autoComplete="react-loqate-address-search" on the input field.
+- 2c987f0: Implement Bias and Origin parameters for use with capture v4 key
+- 9724fa7: Replace @mui/base with native React implementations
+
+  Removes the @mui/base dependency by implementing native React versions of Portal and ClickAwayListener components. This reduces bundle size and eliminates external dependencies while maintaining full functionality and compatibility.
+  - Created native Portal component using React's createPortal
+  - Created native ClickAwayListener component using DOM event listeners
+  - Added comprehensive test coverage for both new utility components
+  - All existing functionality preserved with no breaking changes
+
+### Patch Changes
+
+- a132960: - Fix focus being lost when input value is set from external state
+- 6bbbfb3: Reorganize test file structure for improved maintainability. Move test files from nested `__tests__` directories to cleaner locations, consolidate fixtures and snapshots in dedicated testing folders, and update import paths accordingly.
+- e9a11d3: Update test dependencies and fix all test warnings
+
 ## 3.0.1
 
 ### Patch Changes
