@@ -4,6 +4,7 @@ exports[`allows for alternative url 1`] = `
 <body>
   <div>
     <input
+      autocomplete="react-loqate-address-search"
       class="react-loqate-input"
       value="a"
     />
@@ -43,6 +44,7 @@ exports[`renders default 1`] = `
 <body>
   <div>
     <input
+      autocomplete="react-loqate-address-search"
       class="react-loqate-input"
       value="a"
     />
@@ -169,6 +171,7 @@ exports[`renders with custom components 1`] = `
 <body>
   <div>
     <input
+      autocomplete="react-loqate-address-search"
       class=""
       data-testid="custom-input"
       value="a"
@@ -287,6 +290,7 @@ exports[`renders with inline results 1`] = `
   data-testid="react-loqate"
 >
   <input
+    autocomplete="react-loqate-address-search"
     class="react-loqate-input"
     value="a"
   />
@@ -413,6 +417,7 @@ exports[`renders with portal results 1`] = `
   data-testid="react-loqate"
 >
   <input
+    autocomplete="react-loqate-address-search"
     class="react-loqate-input"
     value="a"
   />

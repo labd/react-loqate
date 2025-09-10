@@ -435,3 +435,38 @@ it('preserves focus when using custom Input with external state management', asy
   const suggestions = screen.getAllByRole('listitem');
   expect(suggestions.length).toBeGreaterThan(0);
 });
+
+it('disables browser autocomplete by default', () => {
+  render(<AddressSearch locale="en-GB" apiKey="some-key" onSelect={vi.fn()} />);
+
+  const input = screen.getByRole('textbox');
+  expect(input).toHaveAttribute('autocomplete', 'react-loqate-address-search');
+});
+
+it('allows enabling browser autocomplete when disableBrowserAutocomplete is false', () => {
+  render(
+    <AddressSearch
+      locale="en-GB"
+      apiKey="some-key"
+      onSelect={vi.fn()}
+      disableBrowserAutocomplete={false}
+    />
+  );
+
+  const input = screen.getByRole('textbox');
+  expect(input).not.toHaveAttribute('autocomplete');
+});
+
+it('disables browser autocomplete when disableBrowserAutocomplete is true', () => {
+  render(
+    <AddressSearch
+      locale="en-GB"
+      apiKey="some-key"
+      onSelect={vi.fn()}
+      disableBrowserAutocomplete={true}
+    />
+  );
+
+  const input = screen.getByRole('textbox');
+  expect(input).toHaveAttribute('autocomplete', 'react-loqate-address-search');
+});

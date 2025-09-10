@@ -1,5 +1,6 @@
 import { fetch } from 'cross-fetch';
 import { describe, expect, it } from 'vitest';
+import { LoqateError } from '../error';
 import { server } from '../server';
 import { biasHandler, errorHandler } from '../serverHandlers';
 import { selection } from '../testing/fixtures/selection';
@@ -79,7 +80,7 @@ describe('Loqate', () => {
           limit: 10,
           containerId: 'some-container-id',
         });
-      }).rejects.toThrowError(new Error('Unknown key'));
+      }).rejects.toThrowError('Unknown key');
     });
 
     it('should throw loqate errors', async () => {
@@ -87,7 +88,7 @@ describe('Loqate', () => {
 
       const loqate = Loqate.create('some-key');
 
-      let error;
+      let error: unknown;
       try {
         await loqate.find({
           text: 'some-text',
@@ -100,7 +101,8 @@ describe('Loqate', () => {
         error = e;
       }
 
-      expect(error).toEqual(new Error('Unknown key'));
+      expect(error).toBeInstanceOf(LoqateError);
+      expect((error as LoqateError).message).toBe('Unknown key');
       expect(JSON.stringify(error)).toEqual(
         JSON.stringify({
           Cause: 'The key you are using to access the service was not found.',

@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React, { type ReactPortal, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { beforeEach, expect, it, vi } from 'vitest';
@@ -192,14 +193,20 @@ it('waits for mounting before creating portal', async () => {
     );
   };
 
-  render(<TestComponent />);
+  await act(async () => {
+    render(<TestComponent />);
+  });
 
   expect(mockCreatePortal).not.toHaveBeenCalled();
   expect(screen.queryByTestId('delayed-child')).not.toBeInTheDocument();
 
-  screen.getByText('Show Portal').click();
+  await act(async () => {
+    await userEvent.click(screen.getByText('Show Portal'));
+  });
 
-  await screen.findByTestId('delayed-child');
+  await act(async () => {
+    await screen.findByTestId('delayed-child');
+  });
 
   expect(mockCreatePortal).toHaveBeenCalledTimes(1);
 });

@@ -32,6 +32,7 @@ export interface Props {
   apiUrl?: string;
   bias?: boolean;
   origin?: string;
+  disableBrowserAutocomplete?: boolean;
 }
 
 interface Components {
@@ -134,6 +135,7 @@ function AddressSearch(props: Props): JSX.Element {
     apiUrl,
     bias,
     origin,
+    disableBrowserAutocomplete = true,
   } = props;
   const loqate = useMemo(() => Loqate.create(apiKey, apiUrl), [apiKey]);
 
@@ -231,6 +233,10 @@ function AddressSearch(props: Props): JSX.Element {
         className={clsx(classes?.input)}
         onChange={handleChange}
         value={value}
+        // disabling autocomplete in order to avoid conflict with loqate suggestions
+        autoComplete={
+          disableBrowserAutocomplete ? 'react-loqate-address-search' : undefined
+        }
         onKeyDown={(e) => {
           if (e.key === 'Escape') {
             setSuggestions([]);
