@@ -1,6 +1,7 @@
 {
   "name": "react-loqate",
   "version": "3.0.1",
+  "type": "module",
   "license": "MIT",
   "author": "Bram Kaashoek",
   "main": "dist/index.js",
