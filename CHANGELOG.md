@@ -1,5 +1,12 @@
 # Change log
 
+## 3.1.2
+
+### Patch Changes
+
+- 5bd1e11: set up a trusted publisher
+- 592af0a: fix node version
+
 ## 3.1.1
 
 ### Patch Changes
