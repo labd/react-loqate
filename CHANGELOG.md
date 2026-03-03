@@ -1,5 +1,11 @@
 # Change log
 
+## 3.1.1
+
+### Patch Changes
+
+- 82db412: Fix package.json module exports to correctly reference build outputs.
+
 ## 3.1.0
 
 ### Minor Changes
