@@ -2,12 +2,12 @@ name: Pinact
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
   pull_request:
-    branches: ["**"]
+    branches: ['**']
     paths:
-      - ".github/workflows/**"
-      - ".github/actions/**"
+      - '.github/workflows/**'
+      - '.github/actions/**'
 
 permissions: {}
 
