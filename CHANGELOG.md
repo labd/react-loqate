@@ -1,5 +1,11 @@
 # Change log
 
+## 3.1.3
+
+### Patch Changes
+
+- 3782e45: fix export for default css
+
 ## 3.1.2
 
 ### Patch Changes
