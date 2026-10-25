@@ -61,28 +61,19 @@ jobs:
           version: 8
           run_install: true
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c # v3.5.0
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
       - name: Upgrade npm for trusted publishing
         run: npm i -g npm@^11.11.0
 
       - name: Create and publish versions
-        uses: changesets/action@6a0a831ff30acef54f2c6aa1cbbc1096b066edaf # v1.7.0
+        uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
         with:
-          title: 'Release new version'
-          commit: 'update version'
-          publish: pnpm publish:ci
+          # changesets/action v2 renamed every one of these inputs.
+          pr-title: 'Release new version'
+          commit-message: 'update version'
+          publish-script: pnpm publish:ci
+          # v2 pushes the release commit and tags through the GitHub API; the
+          # git CLI path keeps the previous behaviour.
+          push-with-git-cli: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
