@@ -1,0 +1,4 @@
+allowBuilds:
+  esbuild: false # postinstall not necessary for functionality, see https://github.com/evanw/esbuild/issues/4085
+  msw: false # postinstall only updates a browser worker script (no msw.workerDirectory configured); tests use msw/node
+minimumReleaseAge: 20160 # 14 days
