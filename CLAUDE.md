@@ -18,7 +18,7 @@ This is `react-loqate`, a React component library for Loqate address search API 
 
 - `pnpm test` - Run tests with Vitest in watch mode
 - `pnpm test:ci` - Run tests once for CI
-- `pnpm lint` - Run ESLint and Prettier checks
+- `pnpm lint` - Run ESLint and Biome (formatting and import sorting) checks - `pnpm format` - Format code and sort imports with Biome
 - `tsc` - Run TypeScript compiler for type checking
 
 ### Publishing
@@ -54,7 +54,7 @@ The component integrates with two Loqate API endpoints:
 - **Core**: React 18+, MUI Base (for Portal/ClickAwayListener), clsx for class management
 - **Build**: tsup for bundling, TypeScript for types
 - **Testing**: Vitest with jsdom, React Testing Library
-- **Development**: Storybook for component development, ESLint + Prettier for code quality
+- **Development**: Storybook for component development, ESLint + Biome for code quality
 
 ## Testing
 
@@ -69,7 +69,7 @@ Coverage is configured to include all TypeScript files in the `src/` directory.
 
 - **TypeScript**: Strict mode enabled with comprehensive type checking
 - **ESLint**: Uses recommended rules + TypeScript + Storybook plugins
-- **Prettier**: Configured for 80-character lines, semicolons, single quotes
+- **Biome**: Formatter and import sorting (`biome.jsonc`), configured for 80-character lines, semicolons, single quotes
 - **Husky**: Pre-commit hook runs `pnpm check`
 - **Package Manager**: Uses pnpm with lockfile
 
