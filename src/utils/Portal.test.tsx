@@ -1,4 +1,4 @@
-import { render, screen, act } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { type ReactPortal, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { InputHTMLAttributes, Ref, forwardRef } from 'react';
+import React, { forwardRef, InputHTMLAttributes, Ref } from 'react';
 import './DefaultInput.css';
 
 const DefaultInput = forwardRef(
