@@ -24,7 +24,7 @@ export class LoqateError extends Error {
   constructor({
     Description,
     Cause,
-    Error,
+    Error: error,
     Resolution,
   }: {
     Description: string;
@@ -35,7 +35,7 @@ export class LoqateError extends Error {
     super(Description);
     this.Cause = Cause;
     this.Description = Description;
-    this.Error = Error;
+    this.Error = error;
     this.Resolution = Resolution;
   }
 }

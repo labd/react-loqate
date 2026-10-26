@@ -1,4 +1,4 @@
-import { Item, LoqateErrorItem } from '..';
+import type { Item, LoqateErrorItem } from '..';
 import {
   LOQATE_BASE_URL,
   LOQATE_FIND_URL,

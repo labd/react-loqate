@@ -5,6 +5,7 @@ function useDebounceEffect(
   delay: number | undefined,
   deps: string[]
 ) {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: the caller provides the dependencies
   const callback = useCallback(effect, deps);
 
   useEffect(() => {
