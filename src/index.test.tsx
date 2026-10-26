@@ -1,8 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { fetch } from 'cross-fetch';
 import React from 'react';
-import { afterAll, afterEach, beforeAll, expect, it, vi } from 'vitest';
+import { expect, it, vi } from 'vitest';
 import ErrorBoundary from './ErrorBoundary';
 import AddressSearch from './index';
 import { server } from './server';
@@ -10,12 +9,7 @@ import { errorHandler } from './serverHandlers';
 import { selection } from './testing/fixtures/selection';
 import Loqate from './utils/Loqate';
 
-global.fetch = fetch;
-
 console.error = vi.fn();
-beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
 
 it('renders default', async () => {
   const { baseElement } = render(
@@ -267,9 +261,9 @@ it('uses tab to set focus on the first list item', async () => {
   await waitFor(() => {
     expect(input).toHaveFocus();
   });
-  userEvent.tab();
+  const [firstListItem] = await screen.findAllByRole('listitem');
+  await userEvent.tab();
 
-  const firstListItem = await screen.getAllByRole('listitem')[0];
   await waitFor(() => {
     expect(firstListItem).toHaveFocus();
   });
@@ -291,24 +285,24 @@ it('uses the arrow keys to cycle through the list items', async () => {
   fireEvent.change(input, { target: { value: 'a' } });
   const listItems = await screen.findAllByRole('listitem');
 
-  userEvent.tab();
+  await userEvent.tab();
   await waitFor(() => {
     expect(listItems[0]).toHaveFocus();
   });
 
-  userEvent.keyboard('{arrowDown}');
+  await userEvent.keyboard('{arrowDown}');
   await waitFor(() => {
     expect(listItems[1]).toHaveFocus();
   });
 
-  userEvent.keyboard('{arrowUp}');
+  await userEvent.keyboard('{arrowUp}');
   await waitFor(() => {
     expect(listItems[0]).toHaveFocus();
   });
 
   // check out of bounds up, have to go back down to make sure you dont have false positive
-  userEvent.keyboard('{arrowUp}');
-  userEvent.keyboard('{arrowDown}');
+  await userEvent.keyboard('{arrowUp}');
+  await userEvent.keyboard('{arrowDown}');
   await waitFor(() => {
     expect(listItems[1]).toHaveFocus();
   });
@@ -319,8 +313,8 @@ it('uses the arrow keys to cycle through the list items', async () => {
   await waitFor(() => {
     expect(listItems[lastIndex]).toHaveFocus();
   });
-  userEvent.keyboard('{arrowDown}');
-  userEvent.keyboard('{arrowUp}');
+  await userEvent.keyboard('{arrowDown}');
+  await userEvent.keyboard('{arrowUp}');
   await waitFor(() => {
     expect(listItems[lastIndex - 1]).toHaveFocus();
   });
@@ -388,7 +382,7 @@ it('preserves focus when using custom Input with external state management', asy
         apiKey="test-key"
         onSelect={() => {}}
         components={{
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // biome-ignore lint/suspicious/noExplicitAny: test component accepts any props
           Input: React.forwardRef<HTMLInputElement, any>(
             ({ value, onChange, ...rest }, ref) => {
               React.useEffect(() => {

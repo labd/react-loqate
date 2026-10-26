@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 
 function usePreserveFocus<T extends HTMLElement = HTMLElement>(): {
-  elementRef: React.RefObject<T>;
+  elementRef: React.RefObject<T | null>;
   preserveFocus: () => void;
 } {
   const elementRef = useRef<T>(null);

@@ -1,12 +1,12 @@
 import clsx from 'clsx';
-import React, { forwardRef, OlHTMLAttributes, Ref } from 'react';
+import React, { forwardRef, type OlHTMLAttributes, type Ref } from 'react';
 import './DefaultList.css';
 
 const DefaultList = forwardRef(
   (
     props: OlHTMLAttributes<HTMLUListElement>,
     ref: Ref<HTMLUListElement>
-  ): JSX.Element => {
+  ): React.JSX.Element => {
     const { className, ...rest } = props;
 
     return (

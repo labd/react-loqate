@@ -5,20 +5,14 @@ const config: StorybookConfig = {
   addons: [
     '@storybook/addon-onboarding',
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
+    '@storybook/addon-docs',
     '@chromatic-com/storybook',
-    '@storybook/addon-interactions',
-    '@storybook/addon-mdx-gfm',
   ],
   framework: {
     name: '@storybook/react-vite',
     options: {},
   },
-  docs: {
-    autodocs: 'tag',
-  },
   viteFinal: async (config) => {
-    // return mergeConfig(config, {define: {'process.env': {}}})}
     return { ...config, define: { 'process.env': {} } };
   },
 };

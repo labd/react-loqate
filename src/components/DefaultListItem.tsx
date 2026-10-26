@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import React, { LiHTMLAttributes } from 'react';
-import { Item } from '..';
+import React, { type LiHTMLAttributes } from 'react';
+import type { Item } from '..';
 import './DefaultListItem.css';
 
 const DefaultListItem = (
   props: LiHTMLAttributes<HTMLLIElement> & { suggestion: Item }
-): JSX.Element => {
+): React.JSX.Element => {
   const { className, value, suggestion, onKeyDown, ...rest } = props;
 
   const regex = new RegExp(

@@ -179,7 +179,7 @@ exports[`renders with custom components 1`] = `
   </div>
   <ul
     data-testid="custom-list"
-    style="position: absolute; top: 0px; left: 0px;"
+    style="position: absolute; top: 0px; left: 0px; width: 0px;"
   >
     <li
       data-testid="custom-list-item"

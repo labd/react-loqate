@@ -1,4 +1,3 @@
-import { fetch } from 'cross-fetch';
 import { describe, expect, it } from 'vitest';
 import { LoqateError } from '../error';
 import { server } from '../server';
@@ -6,8 +5,6 @@ import { biasHandler, errorHandler } from '../serverHandlers';
 import { selection } from '../testing/fixtures/selection';
 import { suggestions } from '../testing/fixtures/suggestions';
 import Loqate from './Loqate';
-
-global.fetch = fetch;
 
 describe('Loqate', () => {
   it('should initialize', () => {
