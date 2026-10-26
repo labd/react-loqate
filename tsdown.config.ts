@@ -1,6 +1,8 @@
 import { defineConfig } from 'tsdown';
 
 export default defineConfig({
+  publint: true,
+  failOnWarn: true,
   entry: ['./src/index.tsx'],
   format: ['esm', 'cjs'],
   dts: true,

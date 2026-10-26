@@ -45,7 +45,6 @@
     "dev": "storybook dev -p 6006",
     "format": "biome check --write",
     "lint": "eslint src && biome check",
-    "lint:package": "publint --strict",
     "prepare": "husky",
     "publish:ci": "pnpm build && pnpm changeset publish",
     "publish:version": "pnpm changeset version && pnpm format",
