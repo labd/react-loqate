@@ -10,7 +10,7 @@ This is `react-loqate`, a React component library for Loqate address search API 
 
 ### Building and Development
 
-- `pnpm build` - Build the library using tsup (ESM, CJS formats with TypeScript declarations)
+- `pnpm build` - Build the library using tsdown (ESM, CJS formats with TypeScript declarations)
 - `pnpm dev` - Start Storybook development server on port 6006
 - `pnpm check` - Run linting and type checking (used by pre-commit hook)
 
@@ -18,7 +18,7 @@ This is `react-loqate`, a React component library for Loqate address search API 
 
 - `pnpm test` - Run tests with Vitest in watch mode
 - `pnpm test:ci` - Run tests once for CI
-- `pnpm lint` - Run ESLint and Biome (formatting and import sorting) checks - `pnpm format` - Format code and sort imports with Biome
+- `pnpm lint` - Run ESLint (Storybook rules) and Biome (lint, formatting and import sorting) checks - `pnpm format` - Format code and sort imports with Biome
 - `tsc` - Run TypeScript compiler for type checking
 
 ### Publishing
@@ -52,7 +52,7 @@ The component integrates with two Loqate API endpoints:
 ### Dependencies
 
 - **Core**: React 18+, MUI Base (for Portal/ClickAwayListener), clsx for class management
-- **Build**: tsup for bundling, TypeScript for types
+- **Build**: tsdown for bundling, TypeScript for types
 - **Testing**: Vitest with jsdom, React Testing Library
 - **Development**: Storybook for component development, ESLint + Biome for code quality
 
@@ -68,8 +68,8 @@ Coverage is configured to include all TypeScript files in the `src/` directory.
 ## Configuration Notes
 
 - **TypeScript**: Strict mode enabled with comprehensive type checking
-- **ESLint**: Uses recommended rules + TypeScript + Storybook plugins
-- **Biome**: Formatter and import sorting (`biome.jsonc`), configured for 80-character lines, semicolons, single quotes
+- **ESLint**: Only runs the Storybook plugin rules (`eslint.config.js`)
+- **Biome**: Linter, formatter and import sorting (`biome.jsonc`), configured for 80-character lines, semicolons, single quotes
 - **Husky**: Pre-commit hook runs `pnpm check`
 - **Package Manager**: Uses pnpm with lockfile
 
