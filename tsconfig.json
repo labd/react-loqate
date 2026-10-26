@@ -3,7 +3,6 @@
   "compilerOptions": {
     "module": "esnext",
     "lib": ["dom", "esnext"],
-    "importHelpers": true,
     "declaration": true,
     "sourceMap": true,
     "rootDir": "./src",
@@ -12,12 +11,12 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "jsx": "react",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "types": ["@testing-library/jest-dom"]
+    "types": ["@testing-library/jest-dom/vitest"]
   }
 }

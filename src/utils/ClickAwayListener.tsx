@@ -1,7 +1,13 @@
-import { cloneElement, type ReactElement, useEffect, useRef } from 'react';
+import {
+  cloneElement,
+  type ReactElement,
+  type Ref,
+  useEffect,
+  useRef,
+} from 'react';
 
 interface ClickAwayListenerProps {
-  children: ReactElement;
+  children: ReactElement<{ ref?: Ref<HTMLElement> }>;
   onClickAway: () => void;
 }
 

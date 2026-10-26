@@ -121,7 +121,7 @@ export interface LoqateErrorItem {
   Resolution: string;
 }
 
-function AddressSearch(props: Props): JSX.Element {
+function AddressSearch(props: Props): React.JSX.Element {
   const {
     locale,
     countries,
@@ -137,7 +137,7 @@ function AddressSearch(props: Props): JSX.Element {
     origin,
     disableBrowserAutocomplete = true,
   } = props;
-  const loqate = useMemo(() => Loqate.create(apiKey, apiUrl), [apiKey]);
+  const loqate = useMemo(() => Loqate.create(apiKey, apiUrl), [apiKey, apiUrl]);
 
   const [suggestions, setSuggestions] = useState<Item[]>([]);
   const [value, setValue] = useState('');
@@ -258,6 +258,7 @@ function AddressSearch(props: Props): JSX.Element {
           >
             {suggestions.map((suggestion, i) => (
               <ListItem
+                // biome-ignore lint/suspicious/noArrayIndexKey: suggestion ids are not guaranteed to be unique
                 key={suggestion.Id + i}
                 onClick={() => selectSuggestion(suggestion)}
                 onKeyDown={(e) => {

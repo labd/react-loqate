@@ -1,12 +1,12 @@
 import clsx from 'clsx';
-import React, { forwardRef, InputHTMLAttributes, Ref } from 'react';
+import React, { forwardRef, type InputHTMLAttributes, type Ref } from 'react';
 import './DefaultInput.css';
 
 const DefaultInput = forwardRef(
   (
     props: InputHTMLAttributes<HTMLInputElement>,
     ref: Ref<HTMLInputElement>
-  ): JSX.Element => {
+  ): React.JSX.Element => {
     const { className, ...rest } = props;
 
     return (

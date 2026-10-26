@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { forwardRef, useState } from 'react';
 import AddressSearch, { type Address, type Item } from '..';
 
