@@ -2,3 +2,15 @@ allowBuilds:
   esbuild: false # postinstall not necessary for functionality, see https://github.com/evanw/esbuild/issues/4085
   msw: false # postinstall only updates a browser worker script (no msw.workerDirectory configured); tests use msw/node
 minimumReleaseAge: 20160 # 14 days
+minimumReleaseAgeExclude:
+  # Storybook 10.6.2 (published 2026-10-12) fixes a critical advisory (missing origin validation in the
+  # preview, affects >=10.0.0 <10.6.2). Remove these entries once 10.6.2 is 14 days old (2026-10-26T18:22Z).
+  - "@storybook/addon-docs@10.6.2"
+  - "@storybook/addon-links@10.6.2"
+  - "@storybook/addon-onboarding@10.6.2"
+  - "@storybook/builder-vite@10.6.2"
+  - "@storybook/react@10.6.2"
+  - "@storybook/react-dom-shim@10.6.2"
+  - "@storybook/react-vite@10.6.2"
+  - "eslint-plugin-storybook@10.6.2"
+  - "storybook@10.6.2"
