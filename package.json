@@ -2,6 +2,9 @@
   "name": "react-loqate",
   "version": "3.1.3",
   "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
   "license": "MIT",
   "author": "Bram Kaashoek",
   "main": "dist/index.cjs",
@@ -42,6 +45,7 @@
     "dev": "storybook dev -p 6006",
     "format": "biome check --write",
     "lint": "eslint src && biome check",
+    "lint:package": "publint --strict",
     "prepare": "husky",
     "publish:ci": "pnpm build && pnpm changeset publish",
     "publish:version": "pnpm changeset version && pnpm format",
@@ -86,6 +90,7 @@
     "jsdom": "30.1.2",
     "lint-staged": "^17.6.0",
     "msw": "3.0.3",
+    "publint": "^0.3.25",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "storybook": "10.6.1",
