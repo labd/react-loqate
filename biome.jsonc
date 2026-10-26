@@ -16,9 +16,12 @@
     "lineWidth": 80
   },
   "assist": { "actions": { "source": { "organizeImports": "on" } } },
-  // Linting is still done by eslint (it also runs the storybook plugin rules)
+  // ESLint additionally runs the Storybook plugin rules (eslint.config.js)
   "linter": {
-    "enabled": false
+    "enabled": true,
+    "rules": {
+      "preset": "recommended"
+    }
   },
   "javascript": {
     "jsxRuntime": "reactClassic",

@@ -1,4 +1,4 @@
-import { Address } from '../../index';
+import type { Address } from '../../index';
 
 export const selection: { Items: Address[] } = {
   Items: [

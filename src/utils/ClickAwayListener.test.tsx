@@ -32,7 +32,9 @@ it('does not call onClickAway when clicking inside the component', () => {
     <div>
       <ClickAwayListener onClickAway={onClickAway}>
         <div data-testid="container">
-          <button data-testid="button">Click me</button>
+          <button type="button" data-testid="button">
+            Click me
+          </button>
           <span data-testid="span">Some text</span>
         </div>
       </ClickAwayListener>
