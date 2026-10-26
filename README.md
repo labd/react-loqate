@@ -1,5 +1,8 @@
 # React-Loqate
 
+[![npm](https://img.shields.io/npm/v/react-loqate)](https://www.npmjs.com/package/react-loqate)
+[![CI](https://github.com/labd/react-loqate/actions/workflows/ci.yml/badge.svg)](https://github.com/labd/react-loqate/actions/workflows/ci.yml)
+
 This is a React implementation of the loqate APIs. It features an input, typing in which will result in a list of address options. Clicking an option will trigger your callback with that option.
 
 ## Usage
